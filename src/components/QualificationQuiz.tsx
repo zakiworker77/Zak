@@ -397,7 +397,7 @@ Let's turn my audience into community wealth!`;
             className="space-y-4"
           >
             <h3 className="text-xl md:text-2xl font-serif font-black text-[#1c1b19]">
-              {lang === "en" ? "1. Where do you post your primary fitness content?" : lang === "fr" ? "1. Où publiez-vous votre contenu fitness principal ?" : "1. Fin ktt7 l'content dyal fitness dyalk ktr?"}
+              {lang === "en" ? "1. Where do you post your primary fitness content?" : lang === "fr" ? "1. Où publiez-vous votre contenu fitness principal ?" : "1. Fin kat-lo7 l'content dyal fitness dyalk ktr?"}
             </h3>
             <p className="text-xs font-serif text-[#1c1b19]/60">
               {lang === "en" ? "Select the channel where you have the highest community trust and engagement." : lang === "fr" ? "Sélectionnez le canal où vous avez le plus d'engagement." : "Khtar l'channel fin 3ndk jomhour kbir w engagement tal3."}

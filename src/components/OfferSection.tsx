@@ -33,7 +33,7 @@ export default function OfferSection() {
     },
     guaranteeDesc: {
       en: "We accept full operational liability. We build and host the technical funnels, structure payment pipelines, and close the Instagram leads. If the community does not profit, you pay us nothing.",
-      darija: "7na kankhdmou b koli l'mas'ouliya. Kanbnio l'Funnels, kan9ado structures dyal l'Payments, w kanclowsio Instagram leads dyalk f l'DMs. Ila l'Community dyalk majabetsh l'profit, matkhlss lna walo.",
+      darija: "Kan-hezou l'mas2ouliya kamla. Kanbnio l'Funnels, kan9ado structures dyal l'Payments, w kanclowsio Instagram leads dyalk f l'DMs. Ila l'Community dyalk majabetsh l'profit, matkhlss lna walo.",
       fr: "Nous acceptons l'entière responsabilité opérationnelle. Nous construisons et hébergeons les funnels techniques, structurons les paiements et convertissons les prospects Instagram. Si la communauté ne génère aucun profit, vous ne payez rien."
     },
     guaranteeBtn: {
@@ -138,9 +138,9 @@ export default function OfferSection() {
         "Systèmes d'accueil et de rétention des membres",
         "Objectifs : +20 000 DH/mois de MRR à profit élevé"
       ] : [
-        "Kankssmou community subscription earnings 50/50 f l'flouss",
+        "Kan-9esmou l'arbba7 dyal l'ichtirakat 50/50",
         "Daily DM Sales dyal kol nhar kaimanagiwha l'Closers dyalna",
-        "Onboarding dyal l'Members w tndem systems dyal retention",
+        "Onboarding dyal l'Members w nbniw systems dyal retention",
         "L'hadaf dyalna: +20,000 DH/Month dyal recurring profit (MRR)"
       ]
     }

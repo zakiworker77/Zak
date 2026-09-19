@@ -69,7 +69,7 @@ export default function ProblemSolution() {
     },
     descNew: {
       en: "We design a tailored high-ticket ecosystem leveraging your current audience. We restructure everything so you command automated monthly recurring payments:",
-      darija: "Kankhalqo l'Ecosystem khass bik kaiskhra l'Audience dyalk l'7ali. Kan9ado kolchi bach tboli dkhl monthly recurring revenue b tari9a sahla:",
+      darija: "Kan-khel9o l'Ecosystem khass bik kay-staghlo l'audience dyalk l'7ali. Kan9ado kolchi bach twelli ddekhel monthly recurring revenue b tari9a sahla:",
       fr: "Nous concevons un l'Ecosystem haut de gamme sur mesure tirant parti de votre audience actuelle. Nous restructurons tout pour obtenir des revenus mensuels récurrents :"
     },
     metricOld: {
@@ -131,7 +131,7 @@ export default function ProblemSolution() {
         ? "Spending hours recording voice notes, sending bank transfer details, and chasing clients for payments."
         : lang === "fr"
         ? "Passer des heures à enregistrer des messages vocaux, envoyer des coordonnées bancaires et relancer les clients."
-        : "Kadi3 swaye3 f l'Voice Notes, tsifat l'RIB w bank transfer info, w ttb3 l'Clients bach ikhlsso."
+        : "Kadi3 swaye3 f l'Voice Notes, tsifat l'RIB w bank transfer info, w ttsnna l'Clients bach ikhlsso."
     },
     {
       id: "prob-2",
@@ -141,7 +141,7 @@ export default function ProblemSolution() {
         ? "Stuck selling 200–300 MAD single-payment PDFs. You need an endless cycle of new clients to survive."
         : lang === "fr"
         ? "Bloqué à vendre des PDFs à paiement unique de 200 à 300 DH. Vous avez besoin d'un cycle sans fin pour survivre."
-        : "Wah7l f l'bi3 dyal l'PDFs b 200-300 DH mrra whda. Khassk dima jomhour jdid bach t3ich."
+        : "Wa7el f l'bi3 dyal PDFs b 200-300 DH mrra whda. Khassk dima jomhour jdid bach t3ich."
     },
     {
       id: "prob-3",
@@ -151,7 +151,7 @@ export default function ProblemSolution() {
         ? "If you get sick, take a day off, or stop posting on Instagram, your business income immediately drops to zero."
         : lang === "fr"
         ? "Si vous tombez malade, prenez un jour de congé ou arrêtez de publier, vos revenus tombent immédiatement à zéro."
-        : "Ila mrdi wla khditi nhar fabor wla hbsti l'Instagram, l'madkhoul dyalk kaihbet l' zero f l'blassa."
+        : "Ila mrdi wla khditi nhar fabor wla 7besti l'Instagram, l'madkhoul dyalk kaihbet l' zero f l'blassa."
     }
   ];
 
@@ -174,7 +174,7 @@ export default function ProblemSolution() {
         ? "I turn your Instagram traffic into active, recurring community subscribers. Consistent monthly paydays."
         : lang === "fr"
         ? "Je transforme votre trafic Instagram en abonnés actifs et récurrents. Des revenus stables chaque mois."
-        : "Kanhwlo l'Instagram traffic dyalk l' recurring l'Members naashtin f l'Community kaisifto ishtirak monthly."
+        : "Kan-7ewwlo l'Instagram traffic dyalk l' members nachitine f l'Community kay-khlsso l'ichtirak monthly."
     },
     {
       id: "sol-3",
@@ -184,7 +184,7 @@ export default function ProblemSolution() {
         ? "I jump into your DMs to answer inquiries and convert warm leads into recurring paying community members."
         : lang === "fr"
         ? "Je m'occupe de vos DMs pour répondre aux questions et convertir les prospects en membres récurrents."
-        : "Kandkhlo m3ak f l'DMs directly bach n-jawabou nas w n-clowsio nas l' recurring paying l'Members."
+        : "Kandkhlo m3ak f l'DMs directly bach n-jawabou nas w n-closiw les leads ywelliw paying members."
     }
   ];
 
