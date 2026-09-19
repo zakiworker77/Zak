@@ -1,0 +1,3 @@
+Rename your photo (my image.png) to "zak_profile.png" and drag and drop it into this "public" folder.
+
+The website will automatically recognize it and display it beautifully!

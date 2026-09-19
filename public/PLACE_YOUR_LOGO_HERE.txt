@@ -1,0 +1,3 @@
+Rename your custom logo file (gz logo.png) to exactly "gz_logo.png" and drag and drop it into this "public" folder.
+
+The website header and footer will automatically load it and style it dynamically!
