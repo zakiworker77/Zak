@@ -96,6 +96,24 @@ export default function HeroSection() {
     feat3: content.feat3[lang] || content.feat3.darija
   };
 
+  const scrollToId = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const navbar = document.getElementById("navbar");
+      const offset = navbar ? navbar.offsetHeight : 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <div className="relative w-full min-h-[92vh] bg-[#f9f7f2] flex flex-col justify-center items-center px-4 overflow-hidden pt-28 pb-20 border-b-2 border-[#1c1b19]">
       
@@ -150,6 +168,7 @@ export default function HeroSection() {
         >
           <a
             href="#audit"
+            onClick={(e) => scrollToId(e, "audit")}
             className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#1c1b19] text-[#f9f7f2] hover:bg-[#1d4ed8] hover:text-[#f9f7f2] transition-all font-mono font-bold uppercase tracking-wider text-sm border-2 border-[#1c1b19] shadow-[4px_4px_0px_0px_rgba(28,27,25,0.2)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_0px_rgba(28,27,25,0.2)] w-full sm:w-auto"
           >
             {activeContent.btnAudit}
@@ -158,6 +177,7 @@ export default function HeroSection() {
 
           <a
             href="#calculator"
+            onClick={(e) => scrollToId(e, "calculator")}
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent hover:bg-[#1c1b19] hover:text-[#f9f7f2] transition-all text-[#1c1b19] font-mono font-bold uppercase tracking-wider text-sm border-2 border-[#1c1b19] w-full sm:w-auto shadow-[4px_4px_0px_0px_rgba(28,27,25,0.1)]"
           >
             {activeContent.btnCalc}

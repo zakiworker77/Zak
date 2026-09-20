@@ -95,7 +95,7 @@ export default function AboutSection() {
                 {!imageError ? (
                   <img 
                     src="/zak_profile.png" 
-                    alt="Zak Profile" 
+                    alt="Zakaria - Growth Operator Morocco: Skool Community Setup Consulting & Paid Communities for Moroccan Fitness Coaches" 
                     onError={() => setImageError(true)}
                     className="w-full h-full object-cover transition-all duration-500"
                     referrerPolicy="no-referrer"

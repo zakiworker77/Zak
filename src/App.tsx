@@ -58,6 +58,24 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const navbar = document.getElementById("navbar");
+      const offset = navbar ? navbar.offsetHeight : 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   const menuItems = isEn ? [
     { label: "The Problem", href: "#problem-solution" },
     { label: "The Offer", href: "#offer" },
@@ -90,7 +108,11 @@ export default function App() {
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
           {/* Logo / Title */}
-          <a href="#" className="flex items-center gap-2.5 group">
+          <a 
+            href="/" 
+            onClick={(e) => { e.preventDefault(); handleScrollToTop(); }}
+            className="flex items-center gap-2.5 group"
+          >
             {!logoError ? (
               <img 
                 src="/gz_logo.png" 
@@ -121,6 +143,7 @@ export default function App() {
               <a 
                 key={idx} 
                 href={item.href} 
+                onClick={(e) => scrollToSection(e, item.href.slice(1))}
                 className="hover:text-[#1c1b19] hover:underline transition-colors"
               >
                 {item.label}
@@ -168,6 +191,7 @@ export default function App() {
               </a>
               <a 
                 href="#audit" 
+                onClick={(e) => scrollToSection(e, "audit")}
                 className="px-5 py-2.5 border-2 border-[#1c1b19] bg-[#1c1b19] text-[#f9f7f2] hover:bg-transparent hover:text-[#1c1b19] transition-all text-xs font-mono font-bold uppercase tracking-wider"
               >
                 {isEn ? "Apply for Audit" : "Bghit Audit (Fabor)"}
@@ -194,7 +218,10 @@ export default function App() {
                 <a 
                   key={idx} 
                   href={item.href} 
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    scrollToSection(e, item.href.slice(1));
+                  }}
                   className="text-base font-serif font-black text-[#1c1b19] hover:text-[#1d4ed8] py-1 block"
                 >
                   {item.label}
@@ -214,7 +241,10 @@ export default function App() {
               </a>
               <a 
                 href="#audit" 
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  scrollToSection(e, "audit");
+                }}
                 className="w-full text-center py-3.5 bg-[#1c1b19] text-[#f9f7f2] text-sm font-mono font-bold uppercase tracking-widest border-2 border-[#1c1b19]"
               >
                 {isEn ? "Apply for Audit" : "Bghit Audit (Fabor)"}
@@ -287,9 +317,9 @@ export default function App() {
             <div className="space-y-3">
               <h4 className="font-bold uppercase tracking-wider text-[10px] text-[#1d4ed8]">Pillars</h4>
               <ul className="space-y-2 text-[#f9f7f2]/60">
-                <li><a href="#problem-solution" className="hover:text-[#f9f7f2] hover:underline transition-colors">The Bottleneck</a></li>
-                <li><a href="#offer" className="hover:text-[#f9f7f2] hover:underline transition-colors">The Manifesto</a></li>
-                <li><a href="#calculator" className="hover:text-[#f9f7f2] hover:underline transition-colors">Multiplier</a></li>
+                <li><a href="#problem-solution" onClick={(e) => scrollToSection(e, "problem-solution")} className="hover:text-[#f9f7f2] hover:underline transition-colors">The Bottleneck</a></li>
+                <li><a href="#offer" onClick={(e) => scrollToSection(e, "offer")} className="hover:text-[#f9f7f2] hover:underline transition-colors">The Manifesto</a></li>
+                <li><a href="#calculator" onClick={(e) => scrollToSection(e, "calculator")} className="hover:text-[#f9f7f2] hover:underline transition-colors">Multiplier</a></li>
               </ul>
             </div>
             <div className="space-y-3">
@@ -297,7 +327,7 @@ export default function App() {
               <ul className="space-y-2 text-[#f9f7f2]/60">
                 <li><a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-[#f9f7f2] hover:underline transition-colors">WhatsApp Contact</a></li>
                 <li><a href="https://instagram.com/grow.withzak" target="_blank" rel="noopener noreferrer" className="hover:text-[#f9f7f2] hover:underline transition-colors">Instagram</a></li>
-                <li><a href="#audit" className="hover:text-[#f9f7f2] hover:underline transition-colors">Apply Now</a></li>
+                <li><a href="#audit" onClick={(e) => scrollToSection(e, "audit")} className="hover:text-[#f9f7f2] hover:underline transition-colors">Apply Now</a></li>
               </ul>
             </div>
           </div>

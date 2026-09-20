@@ -146,6 +146,24 @@ export default function OfferSection() {
     }
   ];
 
+  const scrollToId = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const navbar = document.getElementById("navbar");
+      const offset = navbar ? navbar.offsetHeight : 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <div id="offer" className="w-full py-24 px-4 bg-[#f9f7f2] border-b-2 border-[#1c1b19] relative">
       {/* Newspaper faint grid structure background */}
@@ -239,6 +257,7 @@ export default function OfferSection() {
           </div>
           <a
             href="#audit"
+            onClick={(e) => scrollToId(e, "audit")}
             className="px-6 py-3.5 border-2 border-[#1c1b19] bg-[#1c1b19] text-[#f9f7f2] hover:bg-transparent hover:text-[#1c1b19] transition-all text-xs font-mono font-bold uppercase tracking-widest shrink-0 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.15)] relative z-10"
           >
             {activeContent.guaranteeBtn}

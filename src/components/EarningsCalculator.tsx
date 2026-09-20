@@ -18,6 +18,24 @@ export default function EarningsCalculator() {
   const averageOneOnOnePrice = 250; // MAD
   const clientsForSameRevenue = Math.round(totalMRR / averageOneOnOnePrice);
 
+  const scrollToId = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const navbar = document.getElementById("navbar");
+      const offset = navbar ? navbar.offsetHeight : 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   const content = {
     tag: {
       en: "// PARTNERSHIP AUDIT TOOL",
@@ -295,6 +313,7 @@ export default function EarningsCalculator() {
               <div className="mt-8 pt-6 border-t border-[#1c1b19]/10">
                 <a
                   href="#audit"
+                  onClick={(e) => scrollToId(e, "audit")}
                   className="block w-full text-center px-6 py-4 bg-[#1c1b19] text-[#f9f7f2] hover:bg-[#1d4ed8] hover:text-[#f9f7f2] transition-all font-mono font-bold uppercase tracking-wider text-xs border-2 border-[#1c1b19]"
                 >
                   {activeContent.btnReserve}
