@@ -194,16 +194,16 @@ Let's turn my audience into community wealth!`;
       val: "60,000 MAD" 
     },
     { 
-      name: lang === "en" ? "100,000 MAD+ / Mo (Moroccan elite)" : lang === "fr" ? "+100 000 DH / Mois (Élite marocaine)" : "+100,000 DH / Sh7r (Nokhba dyal l'Maroc)", 
+      name: lang === "en" ? "100,000 MAD+ / Mo (Moroccan elite)" : lang === "fr" ? "+100 000 DH / Mois (Élite marocaine)" : "+100,000 DH / Sh7r (Nokhba dyal lmaghrib)", 
       val: "100,000+ MAD" 
     },
   ];
 
   const content = {
     panelTitle: {
-      en: "Bespoke Partnership Audit",
-      darija: "Audit d l'Partnership l'Khassa",
-      fr: "Audit de Partenariat Sur Mesure"
+      en: "Bespoke Partnership Audit 🎯",
+      darija: "Audit d l'Partnership l'Khassa 🎯",
+      fr: "Audit de Partenariat Sur Mesure 🎯"
     },
     panelSub: {
       en: "Qualify for Zak's 50/50 Growth Alignment",
@@ -252,7 +252,7 @@ Let's turn my audience into community wealth!`;
     },
     qualifyDesc: {
       en: `Zak has modeled your metrics against top Moroccan communities. Your estimated audience size of ${state.followers} indicates high qualification margins for reliable recurring MRR.`,
-      darija: `Zak 9add t7lil 3la 7sab l'metrics dyalk m3a top fitness communities f l'Maroc. L'jomhour dyalk d ${state.followers} kaimknk dkhl b madkhoul recurring MRR mzyan.`,
+      darija: `Zak 9add t7lil 3la 7sab l'metrics dyalk m3a top fitness communities f lmaghrib. L'jomhour dyalk d ${state.followers} kaimknk dkhl b madkhoul recurring MRR mzyan.`,
       fr: `Zak a modélisé vos données par rapport aux meilleures communautés de fitness au Maroc. Votre audience indique d'excellentes marges pour générer un MRR récurrent fiable.`
     },
     btnProceed: {

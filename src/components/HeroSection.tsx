@@ -8,53 +8,49 @@ export default function HeroSection() {
   const content = {
     badge: {
       en: "MEMORANDUM: ELITE PARTNERSHIP IN MOROCCO",
-      darija: "MEMORANDUM: L'PARTNERSHIP L'PREMIUM F L'MAROC",
+      darija: "MEMORANDUM: L'PARTNERSHIP L'PREMIUM F L'MAGHRIB",
       fr: "MÉMORANDUM : L'PARTNERSHIP D'ÉLITE AU MAROC"
     },
     headline: {
       en: (
         <>
           Stop Leaving Your <br />
-          <span className="underline decoration-[#1d4ed8] decoration-4 underline-offset-8 decoration-wavy">
+          <span className="text-[#0055ff] underline decoration-[#0055ff] decoration-4 underline-offset-8 decoration-wavy">
             Community Wealth
-          </span> on the Table.
+          </span> on the Table 💸
         </>
       ),
       darija: (
-        <span className="block leading-relaxed">
-          <span dir="rtl" className="inline-block font-sans font-black">
-            كتضيع وقتك فـ <span dir="ltr" className="inline-block font-serif font-black mx-1">WhatsApp DMs</span>؟
-          </span>{" "}
-          <br />
-          <span className="underline decoration-[#1d4ed8] decoration-4 underline-offset-8 decoration-wavy font-serif italic text-3xl sm:text-5xl md:text-6xl">
-            Stop leaving money
-          </span>{" "}
-          on the table.
-        </span>
+        <>
+          Kat-diye3 We9tek f WhatsApp DMs? <br />
+          <span className="text-[#0055ff] underline decoration-[#0055ff] decoration-4 underline-offset-8 decoration-wavy">
+            Stop Leaving Money
+          </span> on the Table 💸
+        </>
       ),
       fr: (
         <>
           Arrêtez de laisser la <br />
-          <span className="underline decoration-[#1d4ed8] decoration-4 underline-offset-8 decoration-wavy">
+          <span className="text-[#0055ff] underline decoration-[#0055ff] decoration-4 underline-offset-8 decoration-wavy">
             Richesse de votre Communauté
-          </span> sur la table.
+          </span> sur la table 💸
         </>
       )
     },
     subheadline: {
       en: (
         <>
-          We partner with elite Moroccan Fitness Coaches to turn follower attention into automated <strong className="text-[#1c1b19] font-black font-mono not-italic bg-yellow-100 px-1 py-0.5">20,000+ MAD/month</strong> recurring communities on Skool. We fund the tech, we manage the members, we close the DMs. <strong className="text-[#1d4ed8] underline font-bold">Zero upfront costs.</strong>
+          We partner with elite Moroccan Fitness Coaches to turn follower attention into automated <strong className="text-[#0055ff] font-black font-mono not-italic bg-blue-50/80 border border-[#0055ff]/20 px-1.5 py-0.5">20,000+ MAD/month</strong> recurring communities on Skool. We fund the tech, we manage the members, we close the DMs. <strong className="text-[#0055ff] underline font-bold">Zero upfront costs.</strong>
         </>
       ),
       darija: (
         <>
-          Kan diro l'Partnership m3a l'Coaches Sportifs f lmaghrib bach n7ewlo followers l' <strong className="text-[#1c1b19] font-black font-mono not-italic bg-yellow-100 px-1 py-0.5">Recurring Revenue</strong> with automated Skool Communities kadiyr <strong className="text-[#1c1b19] font-black font-mono not-italic bg-yellow-100 px-1 py-0.5">+20,000 DH/Mois</strong>. 7na kan ndiro tech job, kan manage-iw l'members, w kan closiw l'DMs. <strong className="text-[#1d4ed8] underline font-bold">Zero upfront costs.</strong>
+          Kan diro l'Partnership m3a l'Coaches Sportifs f lmaghrib bach n7ewlo followers l' <strong className="text-[#1c1b19] font-black font-mono not-italic bg-blue-50/80 px-1 py-0.5">Recurring Revenue</strong> with automated Skool Communities kadiyr <strong className="text-[#0055ff] font-black font-mono not-italic bg-blue-50/80 border border-[#0055ff]/20 px-1.5 py-0.5">+20,000 DH/Mois</strong>. 7na kan ndiro tech job, kan manage-iw l'members, w kan closiw l'DMs. <strong className="text-[#0055ff] underline font-bold">Zero upfront costs.</strong>
         </>
       ),
       fr: (
         <>
-          Nous nous associons aux meilleurs l'Coaches Sportifs marocains pour transformer l'attention de leurs abonnés en l'Recurring Communities automatisées sur Skool, générant <strong className="text-[#1c1b19] font-black font-mono not-italic bg-yellow-100 px-1 py-0.5">plus de 20 000 DH/mois</strong>. Nous finançons la tech, gérons les l'members et concluons les ventes par DM. <strong className="text-[#1d4ed8] underline font-bold">Zéro frais initiaux.</strong>
+          Nous nous associons aux meilleurs l'Coaches Sportifs marocains pour transformer l'attention de leurs abonnés en l'Recurring Communities automatisées sur Skool, générant <strong className="text-[#0055ff] font-black font-mono not-italic bg-blue-50/80 border border-[#0055ff]/20 px-1.5 py-0.5">plus de 20 000 DH/mois</strong>. Nous finançons la tech, gérons les l'members et concluons les ventes par DM. <strong className="text-[#0055ff] underline font-bold">Zéro frais initiaux.</strong>
         </>
       )
     },
@@ -167,8 +163,12 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
         >
           <a
-            href="#audit"
-            onClick={(e) => scrollToId(e, "audit")}
+            href="/audit"
+            onClick={(e) => {
+              e.preventDefault();
+              window.history.pushState({}, "", "/audit");
+              window.dispatchEvent(new PopStateEvent("popstate"));
+            }}
             className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#1c1b19] text-[#f9f7f2] hover:bg-[#1d4ed8] hover:text-[#f9f7f2] transition-all font-mono font-bold uppercase tracking-wider text-sm border-2 border-[#1c1b19] shadow-[4px_4px_0px_0px_rgba(28,27,25,0.2)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_0px_rgba(28,27,25,0.2)] w-full sm:w-auto"
           >
             {activeContent.btnAudit}

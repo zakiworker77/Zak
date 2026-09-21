@@ -15,24 +15,24 @@ export default function ProblemSolution() {
       en: (
         <>
           Answering WhatsApp DMs is <br className="hidden sm:inline" />
-          <span className="underline decoration-[#1d4ed8] decoration-wavy decoration-2">
-            Burning You Out.
+          <span className="text-[#0055ff] underline decoration-[#0055ff] decoration-wavy decoration-2">
+            Burning You Out 🔥
           </span>
         </>
       ),
       darija: (
         <>
-          الجواب على WhatsApp DMs <br className="hidden sm:inline" />
-          <span className="underline decoration-[#1d4ed8] decoration-wavy decoration-2">
-            كيضيع لك وقتك وصحتك.
+          L'Jawab 3la WhatsApp DMs <br className="hidden sm:inline" />
+          <span className="text-[#0055ff] underline decoration-[#0055ff] decoration-wavy decoration-2 underline-offset-8">
+            Kay-diye3 Lik We9tek w Se7tek 🔥
           </span>
         </>
       ),
       fr: (
         <>
           Répondre aux DMs WhatsApp <br className="hidden sm:inline" />
-          <span className="underline decoration-[#1d4ed8] decoration-wavy decoration-2">
-            est en train de vous épuiser.
+          <span className="text-[#0055ff] underline decoration-[#0055ff] decoration-wavy decoration-2">
+            est en train de vous épuiser 🔥
           </span>
         </>
       )
@@ -54,7 +54,7 @@ export default function ProblemSolution() {
     },
     descOld: {
       en: "Moroccan fitness creators struggle with the overhead of low-ticket manual plans. If you are locked into this pattern, you own a stressful daily job, not a scalable business model:",
-      darija: "L'Coaches Sportifs f l'Maroc kaimrdou b l'ktra dyal sda3 rass m3a l'plans l'rkhas. Ila knti b9iti hna, rak khdam khdma s3iba machi business kairbe7:",
+      darija: "L'Coaches Sportifs f lmaghrib kaimrdou b l'ktra dyal sda3 rass m3a l'plans l'rkhas. Ila knti b9iti hna, rak khdam khdma s3iba machi business kairbe7:",
       fr: "Les l'Coaches Sportifs marocains souffrent de la surcharge des plans manuels à bas prix. Si vous êtes bloqué dans ce schéma, vous possédez un travail quotidien stressant :"
     },
     caseNew: {
@@ -125,8 +125,10 @@ export default function ProblemSolution() {
   const problems = [
     {
       id: "prob-1",
-      icon: <Flame className="w-5 h-5 text-[#1d4ed8]" />,
+      tag: "[1/3]",
+      icon: <Flame className="w-5 h-5 text-[#0055ff]" />,
       title: lang === "en" ? "Answering WhatsApp DMs 24/7" : lang === "fr" ? "Répondre aux DMs WhatsApp 24/7" : "L'jawab 3la l'DMs f WhatsApp 24/7",
+      isBlueHighlight: false,
       desc: lang === "en" 
         ? "Spending hours recording voice notes, sending bank transfer details, and chasing clients for payments."
         : lang === "fr"
@@ -135,18 +137,22 @@ export default function ProblemSolution() {
     },
     {
       id: "prob-2",
-      icon: <AlertTriangle className="w-5 h-5 text-[#1d4ed8]" />,
-      title: lang === "en" ? "Selling Cheap 1-on-1 Plans" : lang === "fr" ? "Vendre des plans 1-on-1 bon marché" : "Kabi3 Plans rkhass bzaf 1-on-1",
+      tag: "[2/3]",
+      icon: <AlertTriangle className="w-5 h-5 text-[#0055ff]" />,
+      title: lang === "en" ? "Selling PDFs is a Trap. 🪤" : lang === "fr" ? "Vendre des PDFs est un Piège. 🪤" : "Selling PDFs is a Trap. 🪤",
+      isBlueHighlight: true,
       desc: lang === "en" 
-        ? "Stuck selling 200–300 MAD single-payment PDFs. You need an endless cycle of new clients to survive."
+        ? "Ktbdel mjhoud kbir bach tjib client ykhless 200 DH mrra w7da w ymchi. This creates burnout."
         : lang === "fr"
-        ? "Bloqué à vendre des PDFs à paiement unique de 200 à 300 DH. Vous avez besoin d'un cycle sans fin pour survivre."
-        : "Wa7el f l'bi3 dyal PDFs b 200-300 DH mrra whda. Khassk dima jomhour jdid bach t3ich."
+        ? "Vous dépensez une énergie folle pour obtenir un client qui paie 200 DH une seule fois. Cela crée un burnout immédiat."
+        : "Ktbdel mjhoud kbir bach tjib client ykhless 200 DH mrra w7da w ymchi. This creates burnout."
     },
     {
       id: "prob-3",
-      icon: <XCircle className="w-5 h-5 text-[#1d4ed8]" />,
+      tag: "[3/3]",
+      icon: <XCircle className="w-5 h-5 text-[#0055ff]" />,
       title: lang === "en" ? "Trading 100% Time for Money" : lang === "fr" ? "Échanger 100% de son temps" : "Katbi3 l'wa9t b l'flouss",
+      isBlueHighlight: false,
       desc: lang === "en" 
         ? "If you get sick, take a day off, or stop posting on Instagram, your business income immediately drops to zero."
         : lang === "fr"
@@ -229,16 +235,46 @@ export default function ProblemSolution() {
                 {activeContent.descOld}
               </p>
 
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {problems.map((p) => (
-                  <div key={p.id} className="flex gap-4 items-start">
-                    <div className="mt-1 shrink-0 p-1.5 border border-[#1c1b19]/20 bg-[#fbf9f4]">
-                      {p.icon}
+                  <div 
+                    key={p.id} 
+                    className={`p-4 border transition-all ${
+                      p.isBlueHighlight 
+                        ? "border-2 border-[#0055ff] bg-blue-50/40 shadow-[3px_3px_0px_0px_#0055ff]" 
+                        : "border-[#1c1b19]/15 bg-white"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs font-bold text-[#1c1b19]/60">{p.tag}</span>
+                        <div className="p-1 border border-[#1c1b19]/20 bg-white">
+                          {p.icon}
+                        </div>
+                      </div>
+                      {p.isBlueHighlight && (
+                        <span className="font-mono text-[10px] text-[#0055ff] uppercase font-bold tracking-wider">
+                          Instagram Post Identity
+                        </span>
+                      )}
                     </div>
                     <div>
-                      <h4 className="text-base font-bold font-serif text-[#1c1b19]">{p.title}</h4>
-                      <p className="text-[#1c1b19]/70 text-sm mt-1 leading-relaxed font-serif">{p.desc}</p>
+                      <h4 className={`leading-tight ${
+                        p.isBlueHighlight 
+                          ? "text-xl font-black font-serif text-[#0055ff]" 
+                          : "text-base font-bold font-serif text-[#1c1b19]"
+                      }`}>
+                        {p.title}
+                      </h4>
+                      <p className="text-[#1c1b19]/80 text-sm mt-2 leading-relaxed font-sans font-medium">
+                        {p.desc}
+                      </p>
                     </div>
+                    {p.isBlueHighlight && (
+                      <div className="mt-3 pt-2 border-t border-[#0055ff]/15 flex justify-end">
+                        <span className="text-[10px] font-mono font-bold text-[#0055ff]/80">@grow.withzak</span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

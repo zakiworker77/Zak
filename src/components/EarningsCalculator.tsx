@@ -43,9 +43,9 @@ export default function EarningsCalculator() {
       fr: "// CALCULATEUR DE REVENU RECURRENT"
     },
     title: {
-      en: "The Revenue Multiplier",
-      darija: "Hasibat l'Revenue Recurring dyalk",
-      fr: "Le Multiplicateur de Revenu"
+      en: "The Revenue Multiplier 🧮",
+      darija: "Hasibat l'Revenue Recurring dyalk 🧮",
+      fr: "Le Multiplicateur de Revenu 🧮"
     },
     subtitle: {
       en: "Model your community potential in Moroccan Dirhams (MAD). Observe how converting a tiny, dedicated fraction of your audience changes your business mathematics.",
@@ -69,7 +69,7 @@ export default function EarningsCalculator() {
     },
     calcNote: {
       en: "*Revenue metrics modeled on active global benchmarks. Local Moroccan billing conversion rates are optimized via direct operator integrations.",
-      darija: "*Madkhoul model 3la ishtirakat benchmark global. Systems dyal payments f l'Maroc optimized direct m3a bank transfers.",
+      darija: "*Madkhoul model 3la ishtirakat benchmark global. Systems dyal payments f lmaghrib optimized direct m3a bank transfers.",
       fr: "*Modèles de revenus basés sur des benchmarks mondiaux actifs. Les taux locaux sont optimisés via notre intégration directe."
     },
     ledgerTitle: {
@@ -312,8 +312,13 @@ export default function EarningsCalculator() {
 
               <div className="mt-8 pt-6 border-t border-[#1c1b19]/10">
                 <a
-                  href="#audit"
-                  onClick={(e) => scrollToId(e, "audit")}
+                  href="/audit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.history.pushState({}, "", "/audit");
+                    window.dispatchEvent(new PopStateEvent("popstate"));
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
                   className="block w-full text-center px-6 py-4 bg-[#1c1b19] text-[#f9f7f2] hover:bg-[#1d4ed8] hover:text-[#f9f7f2] transition-all font-mono font-bold uppercase tracking-wider text-xs border-2 border-[#1c1b19]"
                 >
                   {activeContent.btnReserve}

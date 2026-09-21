@@ -35,19 +35,19 @@ export default function AboutSection() {
       en: (
         <>
           I Build High-Converting <br className="hidden sm:inline" />
-          <span className="underline decoration-[#1d4ed8] decoration-2">Automated Systems</span> For Elite Moroccan Creators
+          <span className="text-[#0055ff] underline decoration-[#0055ff] decoration-2">Automated Systems</span> For Elite Moroccan Creators ⚡
         </>
       ),
       darija: (
         <>
-          Kanbnio <span className="underline decoration-[#1d4ed8] decoration-2">Systems Automated</span> <br className="hidden sm:inline" />
-          nadyeen l' les meilleurs Coachs f l'Maroc
+          Kanbnio <span className="text-[#0055ff] underline decoration-[#0055ff] decoration-2">Systems Automated</span> <br className="hidden sm:inline" />
+          nadyeen l' les meilleurs Coachs f lmaghrib ⚡
         </>
       ),
       fr: (
         <>
-          Je construis des <span className="underline decoration-[#1d4ed8] decoration-2">systèmes automatisés</span> <br className="hidden sm:inline" />
-          hautement convertissants pour les créateurs d'élite au Maroc
+          Je construis des <span className="text-[#0055ff] underline decoration-[#0055ff] decoration-2">systèmes automatisés</span> <br className="hidden sm:inline" />
+          hautement convertissants pour les créateurs d'élite au Maroc ⚡
         </>
       )
     },

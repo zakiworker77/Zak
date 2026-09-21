@@ -12,9 +12,9 @@ export default function OfferSection() {
       fr: "// MANIFESTE OPÉRATIONNEL"
     },
     title: {
-      en: "The Partnership Mechanics",
-      darija: "Qawanin dyal l'Partnership",
-      fr: "Les Mécanismes du Partenariat"
+      en: "The Partnership Mechanics ⚙️",
+      darija: "Qawanin dyal l'Partnership ⚙️",
+      fr: "Les Mécanismes du Partenariat ⚙️"
     },
     subtitle: {
       en: "A meticulous division of labor. We command the business operations and technical pipelines, allowing you to focus entirely on training and community guidance.",
@@ -65,7 +65,7 @@ export default function OfferSection() {
       icon: <Cpu className="w-6 h-6 text-[#1c1b19]" />,
       tagline: lang === "en" ? "SYSTEMS & PIPELINES" : lang === "fr" ? "SYSTÈMES & PIPELINES" : "SYSTEMS W PIPELINES",
       title: lang === "en" ? "Done-For-You Tech Setup" : lang === "fr" ? "Configuration l'Tech DFY" : "Setup dyal l'Tech (DFY)",
-      subtitle: lang === "en" ? "Skool & Local Payment Gateways" : lang === "fr" ? "Skool & Passerelles Locaux" : "Skool w Bank Transfers dyal l'Maroc",
+      subtitle: lang === "en" ? "Skool & Local Payment Gateways" : lang === "fr" ? "Skool & Passerelles Locaux" : "Skool w Bank Transfers dyal lmaghrib",
       desc: lang === "en" 
         ? "Full automated community architecture and classroom structure. Zero coding or complex integrations required on your side."
         : lang === "fr"
@@ -196,13 +196,17 @@ export default function OfferSection() {
               className="px-6 md:px-8 py-8 md:py-4 flex flex-col justify-between"
             >
               <div className="space-y-6">
-                {/* Vintage Letterpress Icon representation */}
-                <div className="inline-flex p-2.5 border border-[#1c1b19] bg-[#fbf9f4] text-[#1c1b19]">
-                  {pillar.icon}
+                <div className="flex items-center justify-between">
+                  <div className="inline-flex p-2.5 border border-[#1c1b19] bg-[#fbf9f4] text-[#1c1b19]">
+                    {pillar.icon}
+                  </div>
+                  <span className="font-mono text-xs font-bold text-[#0055ff]">
+                    [{idx + 1}/3]
+                  </span>
                 </div>
 
                 <div>
-                  <span className="block text-[10px] font-mono font-bold text-[#b1392b] uppercase tracking-wider">
+                  <span className="block text-[10px] font-mono font-bold text-[#0055ff] uppercase tracking-wider">
                     {pillar.tagline}
                   </span>
 
@@ -210,7 +214,7 @@ export default function OfferSection() {
                     {pillar.title}
                   </h3>
 
-                  <p className="text-xs font-mono font-bold text-[#1c1b19]/60 mt-1">
+                  <p className="text-xs font-mono font-bold text-[#0055ff] mt-1">
                     {pillar.subtitle}
                   </p>
                 </div>
@@ -256,8 +260,13 @@ export default function OfferSection() {
             </div>
           </div>
           <a
-            href="#audit"
-            onClick={(e) => scrollToId(e, "audit")}
+            href="/audit"
+            onClick={(e) => {
+              e.preventDefault();
+              window.history.pushState({}, "", "/audit");
+              window.dispatchEvent(new PopStateEvent("popstate"));
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className="px-6 py-3.5 border-2 border-[#1c1b19] bg-[#1c1b19] text-[#f9f7f2] hover:bg-transparent hover:text-[#1c1b19] transition-all text-xs font-mono font-bold uppercase tracking-widest shrink-0 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.15)] relative z-10"
           >
             {activeContent.guaranteeBtn}

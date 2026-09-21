@@ -7,88 +7,43 @@ export default function AscensionModel() {
 
   const content = {
     sectionTitle: {
-      en: "The High-Ticket Ascension Model",
-      darija: (
-        <span dir="rtl" className="inline-block text-right sm:text-center w-full">
-          كيفاش تزيد فـ الجودة وتسكيلي لـ <span dir="ltr" className="inline-block font-sans">High-Ticket</span> 📈
-        </span>
-      ),
-      fr: "Le Modèle d'Ascension High-Ticket"
+      en: "The High-Ticket Ascension Model 📈",
+      darija: "Kifash Tzid f l'Qualité w T-scali l'High-Ticket 📈",
+      fr: "Le Modèle d'Ascension High-Ticket 📈"
     },
     sectionSub: {
       en: "Solve the ultimate dilemma: Protecting your time while multiplying client success",
-      darija: (
-        <span dir="rtl" className="inline-block text-right sm:text-center w-full font-serif">
-          كيفاش تحمي وقتك وفي نفس الوقت كتضرب النتايج د الكليان فـ 10
-        </span>
-      ),
+      darija: "Kifash t7mi we9tek w f nefs l'we9t t-drb results dyal l'clients f 10",
       fr: "Résolvez le dilemme ultime : Préserver votre temps tout en démultipliant la réussite de vos clients"
     },
     step1Title: {
       en: "Step 1 (The Foundation): The Skool Community",
-      darija: (
-        <span dir="rtl" className="inline-block text-right w-full font-serif">
-          الكوميونيتي = جودة كثر، وقت أقل
-        </span>
-      ),
+      darija: "L'Community = Qualité Kter, We9t A9al",
       fr: "Étape 1 (La Fondation) : La Communauté Skool"
     },
     step1Desc: {
       en: "Deliver world-class results at scale. The community provides the daily accountability, step-by-step videos, and brotherhood they need. Better results, 10% of your time.",
-      darija: (
-        <span dir="rtl" className="block text-right leading-relaxed font-serif">
-          بزاف كيسحاب ليهم الكوميونيتي كطيح من الجودة د الكوتشينغ. العكس!{" "}
-          <span dir="ltr" className="inline-block font-sans font-semibold text-[#1d4ed8]">The community</span>{" "}
-          كتعطيهم{" "}
-          <span dir="ltr" className="inline-block font-sans font-semibold text-[#1d4ed8]">accountability</span>{" "}
-          يومية، فيديوهات مسجلة، وتجاوب سريع. الكليان كيجيب{" "}
-          <span dir="ltr" className="inline-block font-sans font-semibold text-[#1d4ed8]">results</span>{" "}
-          أحسن، وأنت كتخدم غير 10% من الوقت.
-        </span>
-      ),
+      darija: "Bzaf kay-s7ablhom l'community kat-tiye7 mn l'qualité d l'coaching. L'3eks! The Community kat-3tihom accountability yawmiya, modules mssjlin, w entraide. L'clients kay-jibo better results, w nta kat-khdem ghir 10% mn we9tek.",
       fr: "Offrez des résultats exceptionnels à grande échelle. La communauté fournit le suivi quotidien, les vidéos étape par étape et l'entraide fraternelle dont ils ont besoin. De meilleurs résultats, en y passant seulement 10 % de votre temps."
     },
     step1Badge: {
       en: "FOUNDATIONAL SCALE",
-      darija: (
-        <span dir="rtl" className="font-serif font-bold text-[10px] tracking-normal normal-case">
-          الأساس د لـ <span dir="ltr" className="font-mono font-bold tracking-wider text-[9px] uppercase">AUTOMATION</span>
-        </span>
-      ),
+      darija: "L'ASSAS D L'AUTOMATION",
       fr: "ÉCHELLE DE FONDATION"
     },
     step2Title: {
       en: "Step 2 (The Ascension): High-Ticket 1-on-1",
-      darija: (
-        <span dir="rtl" className="inline-block text-right w-full font-serif">
-          الـ <span dir="ltr" className="inline-block font-sans">One-to-One</span> كيولي VIP 👑
-        </span>
-      ),
+      darija: "L'One-to-One Kay-weli VIP 👑",
       fr: "Étape 2 (L'Ascension) : Le 1-on-1 High-Ticket"
     },
     step2Desc: {
       en: "You never stop 1-on-1 coaching. Instead, your community acts as a pool of ultra-hot leads. You only accept 5 VIP clients a month, but you charge 3x your old price because your time is now exclusive.",
-      darija: (
-        <span dir="rtl" className="block text-right leading-relaxed font-serif">
-          ماعمرك غادي توقف الـ{" "}
-          <span dir="ltr" className="inline-block font-sans font-semibold text-yellow-300">1-on-1 coaching</span>.
-          الكوميونيتي ديالك غاتولي بحال واحد الفلتر{" "}
-          <span dir="ltr" className="inline-block font-sans font-semibold text-yellow-300">(Pool of hot leads)</span>.
-          غاتولي تخدم غير مع 5 ديال لي كليان فـ الشهر، ولكن غاتـ{" "}
-          <span dir="ltr" className="inline-block font-sans font-semibold text-yellow-300">charge 3x</span>{" "}
-          الثمن القديم، حيت وقتك غيولي غالي و{" "}
-          <span dir="ltr" className="inline-block font-sans font-semibold text-yellow-300">Exclusive</span>.
-        </span>
-      ),
+      darija: "Ma3emrek ghati-w9ef l'1-on-1 coaching. L'community dyalek ghat-weli b7al filter (Pool of hot leads). Ghat-weli tkhdem ghir m3a 5 clients f ch'har, walakin ghat-charji 3x l'taman l'9dim 7it we9tek wela exclusive.",
       fr: "Vous n'arrêtez jamais le coaching individuel. À la place, votre communauté sert de vivier de prospects ultra qualifiés. Vous n'acceptez que 5 clients VIP par mois, mais vous facturez 3x votre ancien prix car votre temps est désormais exclusif."
     },
     step2Badge: {
       en: "ELITE EXCLUSIVITY",
-      darija: (
-        <span dir="rtl" className="font-serif font-bold text-[10px] tracking-normal normal-case">
-          النخبة و <span dir="ltr" className="font-mono font-bold tracking-wider text-[9px] uppercase">EXCLUSIVE</span>
-        </span>
-      ),
+      darija: "ELITE EXCLUSIVITY",
       fr: "EXCLUSIVITÉ ÉLITE"
     }
   };
@@ -148,7 +103,10 @@ export default function AscensionModel() {
                   <Users className="w-6 h-6 text-[#1d4ed8]" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-mono font-bold uppercase text-[#1d4ed8] block tracking-widest">STEP 01 // FOUNDATION</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-bold uppercase text-[#0055ff] block tracking-widest">STEP 01 // FOUNDATION</span>
+                    <span className="text-xs font-mono font-bold text-[#0055ff]">[1/2]</span>
+                  </div>
                   <h3 className="text-xl font-black font-serif text-[#1c1b19] leading-tight mt-0.5">
                     {activeContent.step1Title}
                   </h3>
@@ -164,7 +122,7 @@ export default function AscensionModel() {
             {/* Step Bottom Details */}
             <div className="mt-8 pt-6 border-t border-dashed border-[#1c1b19]/10 flex justify-between items-center text-[10px] font-mono uppercase font-bold text-[#1c1b19]/50">
               <span>Time Required: ~10%</span>
-              <span className="text-[#1d4ed8]">Scalable System</span>
+              <span className="text-[#0055ff] font-bold">Scalable System</span>
             </div>
           </motion.div>
 
@@ -177,7 +135,7 @@ export default function AscensionModel() {
             className="bg-[#1c1b19] border-2 border-[#1c1b19] p-8 sm:p-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.15)] relative flex flex-col justify-between text-[#f9f7f2]"
           >
             {/* Top accent label - conditionally styled to preserve Arabic cursive ligatures */}
-            <div className={`absolute top-0 right-8 -translate-y-1/2 bg-[#1d4ed8] text-white px-3 py-1 text-center whitespace-nowrap flex items-center justify-center ${
+            <div className={`absolute top-0 right-8 -translate-y-1/2 bg-[#0055ff] text-white px-3 py-1 text-center whitespace-nowrap flex items-center justify-center ${
               lang === "darija" ? "" : "text-[9px] font-mono font-bold tracking-widest uppercase"
             }`}>
               {activeContent.step2Badge}
@@ -190,7 +148,10 @@ export default function AscensionModel() {
                   <Crown className="w-6 h-6 text-[#1c1b19]" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-mono font-bold uppercase text-yellow-300 block tracking-widest">STEP 02 // ASCENSION</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-bold uppercase text-yellow-300 block tracking-widest">STEP 02 // ASCENSION</span>
+                    <span className="text-xs font-mono font-bold text-yellow-300">[2/2]</span>
+                  </div>
                   <h3 className="text-xl font-black font-serif text-[#f9f7f2] leading-tight mt-0.5">
                     {activeContent.step2Title}
                   </h3>

@@ -34,8 +34,24 @@ import AscensionModel from "./components/AscensionModel";
 import EarningsCalculator from "./components/EarningsCalculator";
 import QualificationQuiz from "./components/QualificationQuiz";
 import AboutSection from "./components/AboutSection";
+import AgreementPage from "./components/AgreementPage";
+import AuditPage from "./components/AuditPage";
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname.toLowerCase().replace(/\/$/, "");
+      const hash = window.location.hash.toLowerCase();
+      if (path === "/agreement" || hash === "#/agreement" || hash === "#agreement") {
+        return "/agreement";
+      }
+      if (path === "/audit" || hash === "#/audit" || hash === "#audit") {
+        return "/audit";
+      }
+    }
+    return "/";
+  });
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -43,6 +59,36 @@ export default function App() {
   const { lang, setLang } = useLanguage();
 
   const isEn = lang === "en";
+
+  // Handle route change on popstate & hashchange, and sanitize empty trailing hash (#)
+  useEffect(() => {
+    // If URL contains lonely `#`, clean it up so address bar stays clean (https://www.growwithzak.online/)
+    if (window.location.hash === "#" || window.location.hash === "#/") {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+
+    const checkRoute = () => {
+      const path = window.location.pathname.toLowerCase().replace(/\/$/, "");
+      const hash = window.location.hash.toLowerCase();
+      if (path === "/agreement" || hash === "#/agreement" || hash === "#agreement") {
+        setCurrentPath("/agreement");
+      } else if (path === "/audit" || hash === "#/audit" || hash === "#audit") {
+        setCurrentPath("/audit");
+      } else {
+        setCurrentPath("/");
+        if (hash === "#" || hash === "#/") {
+          window.history.replaceState(null, "", window.location.pathname + window.location.search);
+        }
+      }
+    };
+
+    window.addEventListener("popstate", checkRoute);
+    window.addEventListener("hashchange", checkRoute);
+    return () => {
+      window.removeEventListener("popstate", checkRoute);
+      window.removeEventListener("hashchange", checkRoute);
+    };
+  }, []);
 
   // Monitor scroll height to add background opacity to header and show scroll-to-top button
   useEffect(() => {
@@ -53,6 +99,26 @@ export default function App() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // If on /agreement route, render the hidden Agreement page
+  if (currentPath === "/agreement") {
+    return <AgreementPage />;
+  }
+
+  // If on /audit route, render the dedicated Audit page
+  if (currentPath === "/audit") {
+    return <AuditPage onNavigateHome={() => {
+      window.history.pushState({}, "", "/");
+      setCurrentPath("/");
+    }} />;
+  }
+
+  const navigateToAudit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.history.pushState({}, "", "/audit");
+    setCurrentPath("/audit");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -190,8 +256,8 @@ export default function App() {
                 {contactWhatsApp}
               </a>
               <a 
-                href="#audit" 
-                onClick={(e) => scrollToSection(e, "audit")}
+                href="/audit" 
+                onClick={navigateToAudit}
                 className="px-5 py-2.5 border-2 border-[#1c1b19] bg-[#1c1b19] text-[#f9f7f2] hover:bg-transparent hover:text-[#1c1b19] transition-all text-xs font-mono font-bold uppercase tracking-wider"
               >
                 {isEn ? "Apply for Audit" : "Bghit Audit (Fabor)"}
@@ -240,10 +306,10 @@ export default function App() {
                 {isEn ? "Contact on WhatsApp" : "Hdr m3aya f WhatsApp"}
               </a>
               <a 
-                href="#audit" 
+                href="/audit" 
                 onClick={(e) => {
                   setMobileMenuOpen(false);
-                  scrollToSection(e, "audit");
+                  navigateToAudit(e);
                 }}
                 className="w-full text-center py-3.5 bg-[#1c1b19] text-[#f9f7f2] text-sm font-mono font-bold uppercase tracking-widest border-2 border-[#1c1b19]"
               >
@@ -327,7 +393,7 @@ export default function App() {
               <ul className="space-y-2 text-[#f9f7f2]/60">
                 <li><a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-[#f9f7f2] hover:underline transition-colors">WhatsApp Contact</a></li>
                 <li><a href="https://instagram.com/grow.withzak" target="_blank" rel="noopener noreferrer" className="hover:text-[#f9f7f2] hover:underline transition-colors">Instagram</a></li>
-                <li><a href="#audit" onClick={(e) => scrollToSection(e, "audit")} className="hover:text-[#f9f7f2] hover:underline transition-colors">Apply Now</a></li>
+                <li><a href="/audit" onClick={navigateToAudit} className="hover:text-[#f9f7f2] hover:underline transition-colors">Apply Now</a></li>
               </ul>
             </div>
           </div>
