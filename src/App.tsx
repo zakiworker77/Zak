@@ -36,6 +36,8 @@ import QualificationQuiz from "./components/QualificationQuiz";
 import AboutSection from "./components/AboutSection";
 import AgreementPage from "./components/AgreementPage";
 import AuditPage from "./components/AuditPage";
+import ToolsDashboard from "./components/ToolsDashboard";
+import BookedPage from "./components/BookedPage";
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(() => {
@@ -47,6 +49,12 @@ export default function App() {
       }
       if (path === "/audit" || hash === "#/audit" || hash === "#audit") {
         return "/audit";
+      }
+      if (path === "/tools" || hash === "#/tools" || hash === "#tools") {
+        return "/tools";
+      }
+      if (path === "/booked" || hash === "#/booked" || hash === "#booked") {
+        return "/booked";
       }
     }
     return "/";
@@ -74,6 +82,10 @@ export default function App() {
         setCurrentPath("/agreement");
       } else if (path === "/audit" || hash === "#/audit" || hash === "#audit") {
         setCurrentPath("/audit");
+      } else if (path === "/tools" || hash === "#/tools" || hash === "#tools") {
+        setCurrentPath("/tools");
+      } else if (path === "/booked" || hash === "#/booked" || hash === "#booked") {
+        setCurrentPath("/booked");
       } else {
         setCurrentPath("/");
         if (hash === "#" || hash === "#/") {
@@ -99,6 +111,15 @@ export default function App() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // If on /booked route, render the Booked page
+  if (currentPath === "/booked") {
+    return <BookedPage onNavigateHome={() => {
+      window.history.pushState({}, "", "/");
+      setCurrentPath("/");
+    }} />;
+  }
+
 
   // If on /agreement route, render the hidden Agreement page
   if (currentPath === "/agreement") {
