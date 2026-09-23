@@ -61,11 +61,11 @@ export default function BookedPage({ onNavigateHome }: { onNavigateHome: () => v
       </div>
 
       {/* Calendly Container */}
-      <div className="w-full max-w-4xl bg-[#1c1b19] border-2 border-[#f9f7f2] shadow-[8px_8px_0px_0px_#f9f7f2] p-1.5 sm:p-4 overflow-hidden rounded-none">
+      <div className="w-full max-w-4xl bg-[#1c1b19] border-2 border-[#f9f7f2] shadow-[8px_8px_0px_0px_#f9f7f2] p-1.5 sm:p-4 rounded-none">
         <div 
           className="calendly-inline-widget w-full" 
           data-url="https://calendly.com/growupwithzak/30min?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=1c1b19&text_color=f9f7f2&primary_color=0055ff" 
-          style={{ minWidth: "320px", height: "720px", width: "100%" }}
+          style={{ minWidth: "320px", height: "1000px", width: "100%" }}
         />
       </div>
 

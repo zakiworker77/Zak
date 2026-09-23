@@ -120,6 +120,10 @@ export default function App() {
     }} />;
   }
 
+  // If on /tools route, render the hidden Tools page
+  if (currentPath === "/tools") {
+    return <ToolsDashboard />;
+  }
 
   // If on /agreement route, render the hidden Agreement page
   if (currentPath === "/agreement") {

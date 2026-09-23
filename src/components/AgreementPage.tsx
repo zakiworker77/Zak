@@ -110,7 +110,7 @@ export default function AgreementPage({
         </div>
 
         {/* 3. The Core Element: Responsive Iframe Wrapper */}
-        <div className="w-full bg-white border-2 border-[#1c1b19] shadow-[6px_6px_0px_0px_#1c1b19] relative overflow-hidden flex flex-col">
+        <div className="w-full bg-white border-2 border-[#1c1b19] shadow-[6px_6px_0px_0px_#1c1b19] relative flex flex-col">
           
           {/* Top Vintage Dossier Bar */}
           <div className="w-full bg-[#1c1b19] text-[#f9f7f2] px-4 py-2.5 flex items-center justify-between border-b border-[#1c1b19] select-none">
@@ -133,16 +133,24 @@ export default function AgreementPage({
             </div>
           )}
 
-          {/* The Embed Iframe */}
-          <div className="w-full min-h-[80vh] md:min-h-[85vh] relative bg-white">
+          {/* The Embed Iframe Container */}
+          <div className="w-full relative bg-white">
             <iframe
               src={tallyUrl}
+              data-tally-src={tallyUrl}
               width="100%"
               height="100%"
               title="Strategic Partnership Agreement"
-              className="w-full min-h-[80vh] md:min-h-[85vh] border-0"
-              onLoad={() => setIframeLoaded(true)}
-              data-tally-src={tallyUrl}
+              className="w-full min-h-[900px] md:min-h-[1100px] border-0"
+              style={{ width: "100%", minHeight: "900px", border: 0 }}
+              onLoad={() => {
+                setIframeLoaded(true);
+                // @ts-expect-error Tally global
+                if (window.Tally) {
+                  // @ts-expect-error Tally global
+                  window.Tally.loadEmbeds();
+                }
+              }}
               loading="lazy"
             />
           </div>
