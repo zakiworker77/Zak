@@ -33,3 +33,11 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #b6ad9d;
 }
+
+/* Ensure embedded iframes do not render inner scrollbars */
+iframe {
+  scrollbar-width: none;
+}
+iframe::-webkit-scrollbar {
+  display: none;
+}

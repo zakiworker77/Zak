@@ -34,6 +34,7 @@ import AscensionModel from "./components/AscensionModel";
 import EarningsCalculator from "./components/EarningsCalculator";
 import QualificationQuiz from "./components/QualificationQuiz";
 import AboutSection from "./components/AboutSection";
+import FaqSection from "./components/FaqSection";
 import AgreementPage from "./components/AgreementPage";
 import AuditPage from "./components/AuditPage";
 import ToolsDashboard from "./components/ToolsDashboard";
@@ -367,6 +368,9 @@ export default function App() {
 
         {/* About Operator Section */}
         <AboutSection />
+
+        {/* 7. SEO FAQ Section (High-ranking semantic Moroccan questions & answers) */}
+        <FaqSection />
       </main>
 
       {/* 3. Footer */}
@@ -411,6 +415,7 @@ export default function App() {
                 <li><a href="#problem-solution" onClick={(e) => scrollToSection(e, "problem-solution")} className="hover:text-[#f9f7f2] hover:underline transition-colors">The Bottleneck</a></li>
                 <li><a href="#offer" onClick={(e) => scrollToSection(e, "offer")} className="hover:text-[#f9f7f2] hover:underline transition-colors">The Manifesto</a></li>
                 <li><a href="#calculator" onClick={(e) => scrollToSection(e, "calculator")} className="hover:text-[#f9f7f2] hover:underline transition-colors">Multiplier</a></li>
+                <li><a href="#faq" onClick={(e) => scrollToSection(e, "faq")} className="hover:text-[#f9f7f2] hover:underline transition-colors">FAQ & Solutions</a></li>
               </ul>
             </div>
             <div className="space-y-3">
@@ -452,6 +457,13 @@ export default function App() {
               © {new Date().getFullYear()} Zak. Case No. 01. Registered in Morocco.
             </p>
           </div>
+        </div>
+
+        {/* Semantic Footer Keyword Cloud */}
+        <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-[#f9f7f2]/10 text-center relative z-10">
+          <p className="text-[11px] font-mono tracking-wide text-[#f9f7f2]/40 hover:text-[#f9f7f2]/70 transition-colors leading-relaxed selection:bg-[#38bdf8] selection:text-[#0F0F12]">
+            خدمات إعداد منصات Skool | Growth Operator Maroc | أنظمة التدريب الأونلاين للمدربين المغاربة | الدار البيضاء - الرباط - مراكش
+          </p>
         </div>
       </footer>
 

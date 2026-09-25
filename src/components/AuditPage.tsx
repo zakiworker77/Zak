@@ -12,7 +12,29 @@ export default function AuditPage({
 }: AuditPageProps) {
   const [logoError, setLogoError] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [iframeHeight, setIframeHeight] = useState<number>(1100);
   const currentYear = new Date().getFullYear();
+
+  // Listen to Tally postMessages to dynamically adjust iframe height and eliminate any inner scrollbar
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      try {
+        const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+        if (data && typeof data === "object") {
+          if (data.event?.startsWith("Tally.") && data.payload?.height) {
+            setIframeHeight(Math.max(Number(data.payload.height) + 50, 900));
+          } else if (data.height && typeof data.height === "number") {
+            setIframeHeight(Math.max(data.height + 50, 900));
+          }
+        }
+      } catch {
+        // Ignore non-json messages
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   // Load Tally embed script dynamically for optimal auto-resizing
   useEffect(() => {
@@ -164,11 +186,16 @@ export default function AuditPage({
             <iframe
               src={tallyUrl}
               data-tally-src={tallyUrl}
-              width="100%"
-              height="100%"
               title="Bespoke Partnership Audit"
-              className="w-full min-h-[900px] md:min-h-[1100px] border-0"
-              style={{ width: "100%", minHeight: "900px", border: 0 }}
+              scrolling="no"
+              style={{ 
+                width: "100%", 
+                height: `${iframeHeight}px`, 
+                minHeight: "900px", 
+                border: "none",
+                overflow: "hidden",
+                display: "block"
+              }}
               onLoad={() => {
                 setIframeLoaded(true);
                 // @ts-expect-error Tally global
