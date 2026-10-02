@@ -39,6 +39,7 @@ import AgreementPage from "./components/AgreementPage";
 import AuditPage from "./components/AuditPage";
 import ToolsDashboard from "./components/ToolsDashboard";
 import BookedPage from "./components/BookedPage";
+import BlogPage from "./components/BlogPage";
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(() => {
@@ -56,6 +57,9 @@ export default function App() {
       }
       if (path === "/booked" || hash === "#/booked" || hash === "#booked") {
         return "/booked";
+      }
+      if (path === "/blog" || hash === "#/blog" || hash === "#blog") {
+        return "/blog";
       }
     }
     return "/";
@@ -87,6 +91,8 @@ export default function App() {
         setCurrentPath("/tools");
       } else if (path === "/booked" || hash === "#/booked" || hash === "#booked") {
         setCurrentPath("/booked");
+      } else if (path === "/blog" || hash === "#/blog" || hash === "#blog") {
+        setCurrentPath("/blog");
       } else {
         setCurrentPath("/");
         if (hash === "#" || hash === "#/") {
@@ -112,6 +118,14 @@ export default function App() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // If on /blog route, render the Blog page
+  if (currentPath === "/blog") {
+    return <BlogPage onNavigateHome={() => {
+      window.history.pushState({}, "", "/");
+      setCurrentPath("/");
+    }} />;
+  }
 
   // If on /booked route, render the Booked page
   if (currentPath === "/booked") {
@@ -146,6 +160,13 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const navigateToBlog = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.history.pushState({}, "", "/blog");
+    setCurrentPath("/blog");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -171,20 +192,19 @@ export default function App() {
   const menuItems = isEn ? [
     { label: "The Problem", href: "#problem-solution" },
     { label: "The Offer", href: "#offer" },
-    { label: "Potential Calculator", href: "#calculator" },
-    { label: "Book Audit", href: "#audit" },
-    { label: "About Zak", href: "#about" },
+    { label: "Calculator", href: "#calculator" },
+    { label: "Blog", href: "/blog", isRoute: true },
+    { label: "About", href: "#about" },
   ] : [
     { label: "L'Mochkil", href: "#problem-solution" },
     { label: "L'Ard", href: "#offer" },
     { label: "Calculator", href: "#calculator" },
-    { label: "Réservé Audit", href: "#audit" },
+    { label: "Blog", href: "/blog", isRoute: true },
     { label: "Chkon Zak", href: "#about" },
   ];
 
   const contactWhatsApp = "0621520455";
   const whatsappLink = "https://wa.me/212621520455?text=Hi%20Zak!%20I'm%20interested%20in%20scaling%20my%20community%20partnership.";
-
 
   return (
     <div className="min-h-screen bg-[#f9f7f2] text-[#1c1b19] font-sans selection:bg-[#1c1b19] selection:text-[#f9f7f2] overflow-x-hidden antialiased">
@@ -195,15 +215,16 @@ export default function App() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
           scrolled 
             ? "bg-[#f9f7f2]/95 backdrop-blur-md py-3 border-[#1c1b19] shadow-sm" 
-            : "bg-transparent py-5 border-transparent"
+            : "bg-transparent py-4 md:py-5 border-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center gap-4">
+          
           {/* Logo / Title */}
           <a 
             href="/" 
             onClick={(e) => { e.preventDefault(); handleScrollToTop(); }}
-            className="flex items-center gap-2.5 group"
+            className="flex items-center gap-2.5 group shrink-0"
           >
             {!logoError ? (
               <img 
@@ -230,13 +251,19 @@ export default function App() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-xs font-mono font-bold uppercase tracking-wider text-[#1c1b19]/70">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs font-mono font-bold uppercase tracking-wider text-[#1c1b19]/70">
             {menuItems.map((item, idx) => (
               <a 
                 key={idx} 
                 href={item.href} 
-                onClick={(e) => scrollToSection(e, item.href.slice(1))}
-                className="hover:text-[#1c1b19] hover:underline transition-colors"
+                onClick={(e) => {
+                  if (item.isRoute) {
+                    if (item.href === "/blog") navigateToBlog(e);
+                  } else {
+                    scrollToSection(e, item.href.slice(1));
+                  }
+                }}
+                className="hover:text-[#1c1b19] hover:underline transition-colors whitespace-nowrap"
               >
                 {item.label}
               </a>
@@ -244,7 +271,7 @@ export default function App() {
           </nav>
 
           {/* Call to action header button and Language Toggle */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4 shrink-0">
             {/* Language Selector Toggle */}
             <div className="flex items-center gap-0.5 border-2 border-[#1c1b19] bg-white p-0.5 text-[10px] font-mono font-bold shadow-[2px_2px_0px_0px_#1c1b19]">
               <button
@@ -271,20 +298,11 @@ export default function App() {
               </button>
             </div>
 
-            <div className="hidden md:flex items-center gap-6">
-              <a 
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-mono font-bold text-[#1c1b19]/80 hover:text-[#1c1b19] transition-colors flex items-center gap-1.5"
-              >
-                <WhatsAppIcon className="w-4 h-4 text-[#1d4ed8]" />
-                {contactWhatsApp}
-              </a>
+            <div className="hidden sm:flex items-center">
               <a 
                 href="/audit" 
                 onClick={navigateToAudit}
-                className="px-5 py-2.5 border-2 border-[#1c1b19] bg-[#1c1b19] text-[#f9f7f2] hover:bg-transparent hover:text-[#1c1b19] transition-all text-xs font-mono font-bold uppercase tracking-wider"
+                className="px-4 md:px-5 py-2 md:py-2.5 border-2 border-[#1c1b19] bg-[#1c1b19] text-[#f9f7f2] hover:bg-transparent hover:text-[#1c1b19] transition-all text-xs font-mono font-bold uppercase tracking-wider shadow-[2px_2px_0px_0px_#1c1b19]"
               >
                 {isEn ? "Apply for Audit" : "Bghit Audit (Fabor)"}
               </a>
@@ -312,7 +330,11 @@ export default function App() {
                   href={item.href} 
                   onClick={(e) => {
                     setMobileMenuOpen(false);
-                    scrollToSection(e, item.href.slice(1));
+                    if (item.isRoute) {
+                      if (item.href === "/blog") navigateToBlog(e);
+                    } else {
+                      scrollToSection(e, item.href.slice(1));
+                    }
                   }}
                   className="text-base font-serif font-black text-[#1c1b19] hover:text-[#1d4ed8] py-1 block"
                 >
@@ -421,6 +443,7 @@ export default function App() {
             <div className="space-y-3">
               <h4 className="font-bold uppercase tracking-wider text-[10px] text-[#1d4ed8]">Dossier</h4>
               <ul className="space-y-2 text-[#f9f7f2]/60">
+                <li><a href="/blog" onClick={navigateToBlog} className="hover:text-[#f9f7f2] hover:underline transition-colors">Skool Blog & Guides</a></li>
                 <li><a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-[#f9f7f2] hover:underline transition-colors">WhatsApp Contact</a></li>
                 <li><a href="https://instagram.com/grow.withzak" target="_blank" rel="noopener noreferrer" className="hover:text-[#f9f7f2] hover:underline transition-colors">Instagram</a></li>
                 <li><a href="/audit" onClick={navigateToAudit} className="hover:text-[#f9f7f2] hover:underline transition-colors">Apply Now</a></li>

@@ -10,19 +10,19 @@ export default function AgreementPage({
 }: AgreementPageProps) {
   const [logoError, setLogoError] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
-  const [iframeHeight, setIframeHeight] = useState<number>(1200);
+  const [iframeHeight, setIframeHeight] = useState<number>(1450); // Clean initial height for agreement form
   const currentYear = new Date().getFullYear();
 
-  // Listen to Tally postMessages to dynamically adjust iframe height and eliminate any inner scrollbar
+  // Listen to Tally postMessages to dynamically adjust iframe height to match the exact form content
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       try {
         const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
         if (data && typeof data === "object") {
-          if (data.event?.startsWith("Tally.") && data.payload?.height) {
-            setIframeHeight(Math.max(Number(data.payload.height) + 50, 950));
-          } else if (data.height && typeof data.height === "number") {
-            setIframeHeight(Math.max(data.height + 50, 950));
+          const height = data.payload?.height || data.height || data.data?.height;
+          if (height && typeof height === "number" && height > 200) {
+            // Keep a clean ~25px buffer (~2 cm on screen) directly under the submit button
+            setIframeHeight(height + 25);
           }
         }
       } catch {
@@ -56,6 +56,17 @@ export default function AgreementPage({
         window.Tally.loadEmbeds();
       }
     }
+
+    // Refresh embeds after mounting to ensure perfect tight fit
+    const timer = setTimeout(() => {
+      // @ts-expect-error Tally global
+      if (window.Tally) {
+        // @ts-expect-error Tally global
+        window.Tally.loadEmbeds();
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -155,19 +166,16 @@ export default function AgreementPage({
             </div>
           )}
 
-          {/* The Embed Iframe Container */}
+          {/* The Embed Iframe Container - Automatically sized to form contents */}
           <div className="w-full relative bg-white">
             <iframe
               src={tallyUrl}
               data-tally-src={tallyUrl}
               title="Strategic Partnership Agreement"
-              scrolling="no"
               style={{ 
                 width: "100%", 
                 height: `${iframeHeight}px`, 
-                minHeight: "950px", 
                 border: "none",
-                overflow: "hidden",
                 display: "block"
               }}
               onLoad={() => {

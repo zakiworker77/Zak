@@ -12,7 +12,7 @@ export default function AuditPage({
 }: AuditPageProps) {
   const [logoError, setLogoError] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
-  const [iframeHeight, setIframeHeight] = useState<number>(1100);
+  const [iframeHeight, setIframeHeight] = useState<number>(1000);
   const currentYear = new Date().getFullYear();
 
   // Listen to Tally postMessages to dynamically adjust iframe height and eliminate any inner scrollbar
@@ -21,10 +21,9 @@ export default function AuditPage({
       try {
         const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
         if (data && typeof data === "object") {
-          if (data.event?.startsWith("Tally.") && data.payload?.height) {
-            setIframeHeight(Math.max(Number(data.payload.height) + 50, 900));
-          } else if (data.height && typeof data.height === "number") {
-            setIframeHeight(Math.max(data.height + 50, 900));
+          const height = data.payload?.height || data.height || data.data?.height;
+          if (height && typeof height === "number" && height > 200) {
+            setIframeHeight(height + 25);
           }
         }
       } catch {
@@ -58,6 +57,16 @@ export default function AuditPage({
         window.Tally.loadEmbeds();
       }
     }
+
+    const timer = setTimeout(() => {
+      // @ts-expect-error Tally global
+      if (window.Tally) {
+        // @ts-expect-error Tally global
+        window.Tally.loadEmbeds();
+      }
+    }, 1500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleHomeClick = (e: React.MouseEvent) => {
@@ -187,13 +196,10 @@ export default function AuditPage({
               src={tallyUrl}
               data-tally-src={tallyUrl}
               title="Bespoke Partnership Audit"
-              scrolling="no"
               style={{ 
                 width: "100%", 
                 height: `${iframeHeight}px`, 
-                minHeight: "900px", 
                 border: "none",
-                overflow: "hidden",
                 display: "block"
               }}
               onLoad={() => {
