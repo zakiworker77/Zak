@@ -140,7 +140,7 @@ export default function ToolsDashboard() {
         {activeTab === 2 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card title="Skool Engine Inputs">
-              <Input label="Follower Count" value={followers} onChange={setFollowers} min={1000} max={200000} />
+              <Input label="Follower Count" value={followers} onChange={setFollowers} min={1000} max={1000000} />
               <Input label="Conversion Rate (%)" value={convRate} onChange={setConvRate} min={0.1} max={2.0} />
               <Input label="Monthly Fee (MAD)" value={monthlyFee} onChange={setMonthlyFee} min={100} max={1000} />
             </Card>

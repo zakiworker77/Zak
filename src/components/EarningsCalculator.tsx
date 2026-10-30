@@ -14,6 +14,7 @@ import { useLanguage } from "../LanguageContext";
 
 export default function EarningsCalculator() {
   const [followers, setFollowers] = useState<number>(15000);
+  const [followerInputText, setFollowerInputText] = useState<string>("15000");
   const [conversionRate, setConversionRate] = useState<number>(1.0);
   const [monthlyFee, setMonthlyFee] = useState<number>(350);
   
@@ -24,6 +25,81 @@ export default function EarningsCalculator() {
 
   const { lang } = useLanguage();
   const isEn = lang === "en";
+
+  // Piecewise slider mapping to accurately match visual ticks:
+  // 0% -> 2,000 | 33.333% -> 100,000 | 66.666% -> 500,000 | 100% -> 1,000,000
+  const sliderToFollowers = (val: number): number => {
+    if (val <= 0) return 2000;
+    if (val >= 100) return 1000000;
+
+    if (val <= 33.333333) {
+      const ratio = val / 33.333333;
+      const raw = 2000 + ratio * (100000 - 2000);
+      return Math.round(raw / 1000) * 1000;
+    } else if (val <= 66.666666) {
+      const ratio = (val - 33.333333) / 33.333333;
+      const raw = 100000 + ratio * (500000 - 100000);
+      return Math.round(raw / 5000) * 5000;
+    } else {
+      const ratio = (val - 66.666666) / 33.333334;
+      const raw = 500000 + ratio * (1000000 - 500000);
+      return Math.round(raw / 10000) * 10000;
+    }
+  };
+
+  const followersToSlider = (num: number): number => {
+    if (num <= 2000) return 0;
+    if (num >= 1000000) return 100;
+
+    if (num <= 100000) {
+      const ratio = (num - 2000) / (100000 - 2000);
+      return ratio * 33.333333;
+    } else if (num <= 500000) {
+      const ratio = (num - 100000) / (500000 - 100000);
+      return 33.333333 + ratio * 33.333333;
+    } else {
+      const ratio = (num - 500000) / (1000000 - 500000);
+      return 66.666666 + ratio * 33.333334;
+    }
+  };
+
+  const handleFollowerSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const sliderPos = parseFloat(e.target.value);
+    const newFollowers = sliderToFollowers(sliderPos);
+    setFollowers(newFollowers);
+    setFollowerInputText(newFollowers.toString());
+  };
+
+  const handleFollowerInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value;
+    if (raw === "") {
+      setFollowerInputText("");
+      setFollowers(0);
+      return;
+    }
+    const cleanNumStr = raw.replace(/[^0-9]/g, "");
+    setFollowerInputText(cleanNumStr);
+    const val = parseInt(cleanNumStr, 10);
+    if (!isNaN(val)) {
+      setFollowers(Math.min(1000000, val));
+    }
+  };
+
+  const handleFollowerInputBlur = () => {
+    let val = parseInt(followerInputText, 10);
+    if (isNaN(val) || val < 1000) {
+      val = 1000;
+    } else if (val > 1000000) {
+      val = 1000000;
+    }
+    setFollowers(val);
+    setFollowerInputText(val.toString());
+  };
+
+  const setSpecificFollowers = (count: number) => {
+    setFollowers(count);
+    setFollowerInputText(count.toString());
+  };
 
   // Community Calculations
   const estimatedMembers = Math.round(followers * (conversionRate / 100));
@@ -81,26 +157,65 @@ export default function EarningsCalculator() {
             
             <div className="space-y-5">
               
-              {/* 1. Followers Slider */}
+              {/* 1. Followers Slider & Direct Input */}
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-xs font-bold text-[#1c1b19]">
                   <label className="flex items-center gap-1.5 uppercase font-mono">
                     <Users className="w-3.5 h-3.5 text-[#1d4ed8]" />
                     <span>{isEn ? "Followers" : "عدد المتابعين"}</span>
                   </label>
-                  <span className="font-mono px-2 py-0.5 bg-[#f9f7f2] border border-[#1c1b19]">
-                    {followers.toLocaleString()}
-                  </span>
+                  <div className="flex items-center gap-1">
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      value={followerInputText}
+                      onChange={handleFollowerInputChange}
+                      onBlur={handleFollowerInputBlur}
+                      className="font-mono text-xs px-2 py-0.5 bg-[#f9f7f2] border border-[#1c1b19] w-28 text-right font-bold focus:outline-none focus:border-[#1d4ed8]"
+                      placeholder="100000"
+                    />
+                  </div>
                 </div>
                 <input
                   type="range"
-                  min="2000"
-                  max="100000"
-                  step="1000"
-                  value={followers}
-                  onChange={(e) => setFollowers(parseInt(e.target.value))}
+                  min="0"
+                  max="100"
+                  step="0.5"
+                  value={followersToSlider(followers)}
+                  onChange={handleFollowerSliderChange}
                   className="w-full h-1.5 bg-[#1c1b19]/10 rounded-none appearance-none cursor-pointer accent-[#1c1b19]"
                 />
+                <div className="flex justify-between items-center text-[10px] font-mono text-[#1c1b19]/50">
+                  <button 
+                    type="button" 
+                    onClick={() => setSpecificFollowers(2000)}
+                    className="hover:text-[#1d4ed8] hover:font-bold transition-colors cursor-pointer"
+                  >
+                    2k
+                  </button>
+                  <button 
+                    type="button" 
+                    onClick={() => setSpecificFollowers(100000)}
+                    className="hover:text-[#1d4ed8] hover:font-bold transition-colors cursor-pointer"
+                  >
+                    100k
+                  </button>
+                  <button 
+                    type="button" 
+                    onClick={() => setSpecificFollowers(500000)}
+                    className="hover:text-[#1d4ed8] hover:font-bold transition-colors cursor-pointer"
+                  >
+                    500k
+                  </button>
+                  <button 
+                    type="button" 
+                    onClick={() => setSpecificFollowers(1000000)}
+                    className="hover:text-[#1d4ed8] hover:font-bold transition-colors cursor-pointer"
+                  >
+                    1M
+                  </button>
+                </div>
               </div>
 
               {/* 2. Conversion Rate Slider */}
@@ -173,7 +288,7 @@ export default function EarningsCalculator() {
                   <div className="relative flex-1">
                     <input
                       type="number"
-                      value={currentOneOnOneRevenue}
+                      value={currentOneOnOneRevenue === 0 ? "" : currentOneOnOneRevenue}
                       onChange={(e) => {
                         const val = e.target.value === "" ? 0 : Math.max(0, parseInt(e.target.value));
                         setIsCustomMode(true);
