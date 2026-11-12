@@ -40,6 +40,7 @@ import AuditPage from "./components/AuditPage";
 import ToolsDashboard from "./components/ToolsDashboard";
 import BookedPage from "./components/BookedPage";
 import BlogPage from "./components/BlogPage";
+import ScrollManifestoSection from "./components/ScrollManifestoSection";
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(() => {
@@ -372,6 +373,9 @@ export default function App() {
       <main className="w-full">
         {/* Hero Area */}
         <HeroSection />
+
+        {/* Scroll-Driven Typography Reveal & Gamified Levels (Body Politic & ZakPay inspired) */}
+        <ScrollManifestoSection />
 
         {/* Problem vs Solution comparison */}
         <ProblemSolution />

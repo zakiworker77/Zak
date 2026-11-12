@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, ShieldCheck, CheckCircle2, TrendingUp } from "lucide-react";
+import { ArrowRight, ShieldCheck, CheckCircle2, TrendingUp, Play, Sparkles } from "lucide-react";
 import { useLanguage } from "../LanguageContext";
 
 export default function HeroSection() {
   const { lang } = useLanguage();
+  const isEn = lang === "en";
 
   const content = {
     badge: {
@@ -110,6 +112,53 @@ export default function HeroSection() {
     }
   };
 
+  const heroPhrases = isEn
+    ? [
+        "AUTOMATED SKOOL PIPELINES",
+        "+20,000 MAD/MO RECURRING MRR",
+        "WE FUND TECH & CLOSE THE DMs",
+        "50/50 REVENUE SHARE // 0 MAD SETUP",
+      ]
+    : [
+        "SYSTEM AUTOMATED F SKOOL",
+        "+20,000 DH/CHHAR MRR RECURRING",
+        "7NA KAN-CLOSIW L'DMs W N-MANAGEW L'MEMBERS",
+        "50/50 REVENUE SHARE // ZERO SETUP FEES",
+      ];
+
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [typedChars, setTypedChars] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentPhrase = heroPhrases[phraseIndex % heroPhrases.length];
+    let speed = isDeleting ? 30 : 65;
+
+    if (!isDeleting && typedChars === currentPhrase) {
+      // Pause at full word
+      const timeout = setTimeout(() => setIsDeleting(true), 1800);
+      return () => clearTimeout(timeout);
+    } else if (isDeleting && typedChars === "") {
+      setIsDeleting(false);
+      setPhraseIndex((prev) => (prev + 1) % heroPhrases.length);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setTypedChars((prev) => {
+        if (isDeleting) {
+          return currentPhrase.substring(0, prev.length - 1);
+        } else {
+          return currentPhrase.substring(0, prev.length + 1);
+        }
+      });
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [typedChars, isDeleting, phraseIndex, isEn]);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
     <div className="relative w-full min-h-[92vh] bg-[#f9f7f2] flex flex-col justify-center items-center px-4 overflow-hidden pt-28 pb-20 border-b-2 border-[#1c1b19]">
       
@@ -119,21 +168,35 @@ export default function HeroSection() {
       <div className="absolute left-1/12 inset-y-0 w-[1px] bg-[#1c1b19]/5 pointer-events-none hidden lg:block"></div>
       <div className="absolute right-1/12 inset-y-0 w-[1px] bg-[#1c1b19]/5 pointer-events-none hidden lg:block"></div>
 
-      <div className="max-w-4xl mx-auto text-center relative z-10 space-y-10">
+      <div className="max-w-4xl mx-auto text-center relative z-10 space-y-8 md:space-y-10">
         
-        {/* Anti-Slop elegant typewriter badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 border-2 border-[#1c1b19] bg-[#f9f7f2] text-xs font-mono font-bold uppercase tracking-widest text-[#1c1b19] shadow-[3px_3px_0px_0px_#1c1b19]"
-        >
-          <span className="flex h-2 w-2 relative">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1d4ed8] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1d4ed8]"></span>
-          </span>
-          {activeContent.badge}
-        </motion.div>
+        {/* Anti-Slop elegant typewriter badge + Live Typewriter Tag */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 border-2 border-[#1c1b19] bg-[#f9f7f2] text-xs font-mono font-bold uppercase tracking-widest text-[#1c1b19] shadow-[3px_3px_0px_0px_#1c1b19]"
+          >
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1d4ed8] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1d4ed8]"></span>
+            </span>
+            {activeContent.badge}
+          </motion.div>
+
+          {/* Live Micro Typewriter Indicator */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#1d4ed8]/10 border border-[#1d4ed8]/30 text-[#1d4ed8] font-mono text-[11px] font-bold uppercase tracking-wider"
+          >
+            <span className="text-[#1d4ed8] font-mono font-black">&gt;</span>
+            <span className="font-mono min-h-[16px] inline-block">{typedChars}</span>
+            <span className="inline-block w-1.5 h-3.5 bg-[#1d4ed8] animate-pulse"></span>
+          </motion.div>
+        </div>
 
         {/* Huge bold display headline */}
         <motion.h1
@@ -154,6 +217,101 @@ export default function HeroSection() {
         >
           {activeContent.subheadline}
         </motion.p>
+
+        {/* Video Sales Letter (VSL) Container with Custom Branded Player & Play Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
+          className="w-full max-w-[800px] mx-auto pt-2 pb-1"
+        >
+          <div 
+            className="w-full relative overflow-hidden bg-black border-2 border-[#1c1b19] group"
+            style={{ 
+              position: "relative", 
+              paddingBottom: "56.25%", 
+              height: 0, 
+              borderRadius: "12px", 
+              boxShadow: "0 10px 30px rgba(0, 85, 255, 0.25), 4px 4px 0px 0px #1c1b19" 
+            }}
+          >
+            {isPlaying ? (
+              <iframe 
+                src="https://www.youtube.com/embed/WsFVWeUbJ8c?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0&iv_load_policy=3" 
+                style={{ 
+                  position: "absolute", 
+                  top: 0, 
+                  left: 0, 
+                  width: "100%", 
+                  height: "100%", 
+                  border: 0 
+                }} 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen 
+                title="Zak - Skool Growth Operator VSL"
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsPlaying(true)}
+                className="absolute inset-0 w-full h-full p-0 m-0 border-0 text-left cursor-pointer select-none group/play focus:outline-none"
+                aria-label="Play Masterclass Video"
+              >
+                {/* 1. Clean High-Res Thumbnail (Zero YouTube UI) */}
+                <img
+                  src="/vsl_thumbnail.jpg"
+                  alt="Zak - Skool Masterclass Breakdown"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover/play:scale-[1.02]"
+                />
+
+                {/* 2. Cinematic Vignette Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/60 transition-opacity duration-300 group-hover/play:from-black/75 group-hover/play:via-black/15" />
+
+                {/* 3. Top Branded Bar (Replaces YouTube Header) */}
+                <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10 pointer-events-none">
+                  <div className="flex items-center gap-2 bg-[#1c1b19]/90 text-[#f9f7f2] backdrop-blur-md px-3 py-1.5 border border-white/20 text-[10px] md:text-xs font-mono tracking-wider uppercase shadow-md">
+                    <span className="w-2 h-2 rounded-full bg-[#1d4ed8] animate-ping" />
+                    <span className="font-bold">THE NEW MODEL // SKOOL MASTERCLASS</span>
+                  </div>
+
+                  <div className="hidden sm:flex items-center gap-1.5 bg-black/75 text-[#f9f7f2]/90 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono border border-white/15 uppercase">
+                    <Sparkles className="w-3 h-3 text-[#38bdf8]" />
+                    <span>PRIVATE BREAKDOWN</span>
+                  </div>
+                </div>
+
+                {/* 4. Center Stage: Custom Branded Play Button In Our Style */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
+                  {/* Outer Pulsing Glow Halo */}
+                  <div className="relative flex items-center justify-center">
+                    <div className="absolute w-24 h-24 md:w-28 md:h-28 rounded-full bg-[#1d4ed8]/35 blur-xl animate-pulse" />
+                    
+                    {/* The Play Button */}
+                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1d4ed8] text-white flex items-center justify-center border-4 border-white shadow-[0_0_35px_rgba(29,78,216,0.9),4px_4px_0px_0px_#1c1b19] group-hover/play:scale-110 group-hover/play:bg-[#153eb5] transition-all duration-300">
+                      <Play className="w-8 h-8 md:w-10 md:h-10 fill-white text-white ml-1.5 transition-transform group-hover/play:scale-110" />
+                    </div>
+                  </div>
+
+                  {/* Brand Action Pill */}
+                  <div className="mt-4 px-4 py-1.5 bg-[#1c1b19]/95 text-white border-2 border-white/80 font-mono text-xs uppercase tracking-widest font-black shadow-[3px_3px_0px_0px_#1d4ed8] group-hover/play:bg-[#1d4ed8] group-hover/play:border-[#1c1b19] transition-all">
+                    {isEn ? "PLAY MASTERCLASS // FREE BREAKDOWN" : "TFERREJ F'L'MASTERCLASS // FABOR"}
+                  </div>
+                </div>
+
+                {/* 5. Bottom Status Bar */}
+                <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center z-10 pointer-events-none">
+                  <div className="text-[10px] md:text-xs font-mono text-white/90 bg-black/80 backdrop-blur-md px-3 py-1 border border-white/15">
+                    HD 1080P • NO YOUTUBE ADS
+                  </div>
+
+                  <div className="text-[10px] md:text-xs font-mono text-white/90 bg-black/80 backdrop-blur-md px-3 py-1 border border-white/15">
+                    15 MIN INTENSIVE
+                  </div>
+                </div>
+              </button>
+            )}
+          </div>
+        </motion.div>
 
         {/* Call to Actions with Letterpress Shadows */}
         <motion.div
