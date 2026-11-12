@@ -2,9 +2,7 @@ import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "motion/react";
 import { 
   Sparkles, 
-  Terminal, 
   CheckCircle2, 
-  TrendingUp, 
   Layers
 } from "lucide-react";
 import { useLanguage } from "../LanguageContext";
@@ -19,8 +17,8 @@ export default function ScrollManifestoSection() {
   const { lang } = useLanguage();
   const isEn = lang === "en";
 
-  // Dedicated ref for the scroll-linked sticky reveal container
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  // Dedicated ref directly on the Manifesto reading card
+  const manifestoCardRef = useRef<HTMLDivElement>(null);
 
   // Gamified Level console state (Level 01 - Level 03)
   const [activeLevel, setActiveLevel] = useState<number>(1);
@@ -146,14 +144,12 @@ export default function ScrollManifestoSection() {
 
   const words = isEn ? enWords : darijaWords;
 
-  // Track scroll strictly within the tall sticky container
+  // Track scroll naturally as the reading card scrolls through the viewport
+  // Starts when card enters 85% of screen and completes smoothly by the time it reaches the center (35%)
   const { scrollYProgress } = useScroll({
-    target: scrollContainerRef,
-    offset: ["start start", "end end"],
+    target: manifestoCardRef,
+    offset: ["start 85%", "center 35%"],
   });
-
-  // Calculate percentage of reveal for progress badge
-  const progressPercent = useTransform(scrollYProgress, [0.05, 0.85], [0, 100]);
 
   const levels = isEn
     ? [
@@ -206,110 +202,101 @@ export default function ScrollManifestoSection() {
   return (
     <section 
       id="manifesto" 
-      className="w-full bg-[#f9f7f2] border-b-2 border-[#1c1b19] relative"
+      className="w-full py-16 md:py-24 px-4 bg-[#f9f7f2] border-b-2 border-[#1c1b19] relative"
     >
       {/* Editorial background grid */}
       <div className="absolute inset-0 bg-[radial-gradient(#1c1b19_1px,transparent_1px)] [background-size:28px_28px] opacity-5 pointer-events-none"></div>
 
-      {/* Part 1: Sticky Scroll-Reveal Section (The original smooth style that scrolls at the user's pace) */}
-      <div 
-        ref={scrollContainerRef}
-        className="relative h-[220vh] w-full"
-      >
-        <div className="sticky top-20 md:top-28 w-full max-w-5xl mx-auto px-4 py-8">
-          
-          {/* Section Header */}
-          <div className="text-center space-y-2 mb-8">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 border border-[#1c1b19] bg-white text-[11px] font-mono font-bold uppercase tracking-widest text-[#1c1b19] shadow-[2px_2px_0px_0px_#1c1b19]">
-              <Layers className="w-3.5 h-3.5 text-[#1d4ed8]" />
-              <span>{isEn ? "// THE MANIFESTO // SCROLL REVEAL" : "// L'MANIFESTO // سكرولي باش تقرا"}</span>
-            </div>
-
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black font-serif text-[#1c1b19] tracking-tight">
-              {isEn 
-                ? "Transformation Starts in Your Backend." 
-                : "L'Bedya d'l'MRR Kat-bda mn l'Backend."}
-            </h2>
-
-            <p className="text-xs md:text-sm font-mono text-[#1c1b19]/70 max-w-lg mx-auto flex items-center justify-center gap-2">
-              <span>{isEn ? "Scroll down to reveal each word at your own pace" : "هبط بالسكرول باش تشوف كيفاش السيستم كيتبنا كلمة بكلمة"}</span>
-              <span className="inline-block animate-bounce">↓</span>
-            </p>
+      <div className="max-w-5xl mx-auto relative z-10 space-y-10 md:space-y-12">
+        
+        {/* Section Header */}
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 border border-[#1c1b19] bg-white text-[11px] font-mono font-bold uppercase tracking-widest text-[#1c1b19] shadow-[2px_2px_0px_0px_#1c1b19]">
+            <Layers className="w-3.5 h-3.5 text-[#1d4ed8]" />
+            <span>{isEn ? "// THE MANIFESTO // SCROLL REVEAL" : "// L'MANIFESTO // سكرولي باش تقرا"}</span>
           </div>
 
-          {/* Main Manifesto Card */}
-          <div className="p-6 sm:p-8 md:p-12 border-2 border-[#1c1b19] bg-white shadow-[6px_6px_0px_0px_#1c1b19] relative">
-            
-            {/* Top Status Bar */}
-            <div className="flex flex-wrap justify-between items-center gap-3 text-[10px] md:text-xs font-mono border-b border-[#1c1b19]/15 pb-4 mb-6 text-[#1c1b19]/70">
-              <div className="flex items-center gap-2.5">
-                <span className="w-2.5 h-2.5 bg-[#1d4ed8] rounded-full animate-pulse"></span>
-                <span className="font-bold uppercase tracking-wider text-[#1c1b19]">
-                  {isEn ? "SCROLL-LINKED REVEAL // LIVE" : "SCROLL PROGRESS // كمل السكرول"}
-                </span>
-              </div>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-black font-serif text-[#1c1b19] tracking-tight">
+            {isEn 
+              ? "Transformation Starts in Your Backend." 
+              : "L'Bedya d'l'MRR Kat-bda mn l'Backend."}
+          </h2>
 
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono text-[#1c1b19]/50 uppercase hidden sm:inline">
-                  {words.length} {isEn ? "WORDS" : "KALIMA"}
-                </span>
-                <div className="w-20 sm:w-28 h-2 bg-neutral-100 border border-[#1c1b19]/20 overflow-hidden">
-                  <motion.div 
-                    className="h-full bg-[#1d4ed8]"
-                    style={{
-                      width: useTransform(scrollYProgress, [0.05, 0.85], ["0%", "100%"]),
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Word-by-Word Scroll Highlight Display */}
-            <div className="text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] font-serif font-black leading-[1.45] tracking-tight py-2 min-h-[170px] md:min-h-[220px] select-text">
-              {words.map((word, index) => {
-                // Calibrate range across scroll travel [0.05 to 0.85]
-                // Each word has an overlapping window (1.8x step) so transitions are ultra-smooth
-                const total = words.length;
-                const start = 0.05 + (index / total) * 0.78;
-                const end = Math.min(0.92, start + (1 / total) * 1.8);
-
-                return (
-                  <WordItem
-                    key={index}
-                    text={word.text}
-                    isHighlight={word.isHighlight}
-                    isAccent={word.isAccent}
-                    range={[start, end]}
-                    progress={scrollYProgress}
-                  />
-                );
-              })}
-            </div>
-
-            {/* Footer Signature */}
-            <div className="mt-8 pt-4 border-t border-[#1c1b19]/15 flex flex-col sm:flex-row justify-between sm:items-center gap-2 text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 border border-[#1c1b19] bg-[#f9f7f2] flex items-center justify-center font-bold text-[10px]">
-                  GZ
-                </div>
-                <div>
-                  <span className="font-bold text-[#1c1b19]">Zak</span>
-                  <span className="text-[#1c1b19]/50 ml-1.5">// Growth Operator for Fitness Creators</span>
-                </div>
-              </div>
-
-              <div className="text-[10px] text-[#1c1b19]/50 uppercase tracking-widest font-mono">
-                GROWWITHZAK • SKOOL SYSTEMS
-              </div>
-            </div>
-
-          </div>
-
+          <p className="text-xs md:text-sm font-mono text-[#1c1b19]/70 max-w-lg mx-auto flex items-center justify-center gap-2">
+            <span>{isEn ? "Scroll down to illuminate each word" : "هبط بالسكرول باش تشوف كيفاش السيستم كيتبنا كلمة بكلمة"}</span>
+            <span className="inline-block animate-bounce">↓</span>
+          </p>
         </div>
-      </div>
 
-      {/* Part 2: Gamified Process Console (Level 01 - Level 03) */}
-      <div className="max-w-5xl mx-auto px-4 pb-20 md:pb-28 relative z-10">
+        {/* Part 1: Main Manifesto Reading Card (Smooth Natural Scroll Illumination) */}
+        <div 
+          ref={manifestoCardRef}
+          className="p-6 sm:p-8 md:p-12 border-2 border-[#1c1b19] bg-white shadow-[6px_6px_0px_0px_#1c1b19] relative"
+        >
+          {/* Top Status Bar */}
+          <div className="flex flex-wrap justify-between items-center gap-3 text-[10px] md:text-xs font-mono border-b border-[#1c1b19]/15 pb-4 mb-6 text-[#1c1b19]/70">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 bg-[#1d4ed8] rounded-full animate-pulse"></span>
+              <span className="font-bold uppercase tracking-wider text-[#1c1b19]">
+                {isEn ? "MEMORANDUM // SCROLL TO ILLUMINATE" : "SCROLL PROGRESS // كمل السكرول"}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2.5">
+              <span className="text-[10px] font-mono text-[#1c1b19]/60 uppercase font-bold">
+                {words.length} {isEn ? "WORDS" : "KALIMA"}
+              </span>
+              <div className="w-24 sm:w-32 h-2 bg-neutral-100 border border-[#1c1b19]/20 overflow-hidden">
+                <motion.div 
+                  className="h-full bg-[#1d4ed8]"
+                  style={{
+                    width: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]),
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Word-by-Word Scroll Highlight Display - 100% Legible at All Times */}
+          <div className="text-xl sm:text-2xl md:text-3xl lg:text-[2.15rem] font-serif font-black leading-[1.5] tracking-tight py-2 select-text">
+            {words.map((word, index) => {
+              // Evenly distribute each word's illumination window across the scroll distance
+              const total = words.length;
+              const start = (index / total) * 0.75;
+              const end = Math.min(1.0, start + 0.16);
+
+              return (
+                <WordItem
+                  key={index}
+                  text={word.text}
+                  isHighlight={word.isHighlight}
+                  isAccent={word.isAccent}
+                  range={[start, end]}
+                  progress={scrollYProgress}
+                />
+              );
+            })}
+          </div>
+
+          {/* Footer Signature */}
+          <div className="mt-8 pt-4 border-t border-[#1c1b19]/15 flex flex-col sm:flex-row justify-between sm:items-center gap-2 text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 border border-[#1c1b19] bg-[#f9f7f2] flex items-center justify-center font-bold text-[10px]">
+                GZ
+              </div>
+              <div>
+                <span className="font-bold text-[#1c1b19]">Zak</span>
+                <span className="text-[#1c1b19]/50 ml-1.5">// Growth Operator for Fitness Creators</span>
+              </div>
+            </div>
+
+            <div className="text-[10px] text-[#1c1b19]/50 uppercase tracking-widest font-mono">
+              GROWWITHZAK • SKOOL SYSTEMS
+            </div>
+          </div>
+        </div>
+
+        {/* Part 2: Gamified Process Console (Level 01 - Level 03) */}
         <div className="border-2 border-[#1c1b19] bg-[#121110] text-[#f9f7f2] p-5 md:p-8 shadow-[6px_6px_0px_0px_#1d4ed8]">
           {/* Header Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#f9f7f2]/15 pb-4 mb-6">
@@ -405,13 +392,13 @@ export default function ScrollManifestoSection() {
             </div>
           </div>
         </div>
-      </div>
 
+      </div>
     </section>
   );
 }
 
-// Individual Word Component with progressive scroll-driven opacity
+// Individual Word Component with progressive scroll-driven illumination
 function WordItem({
   text,
   isHighlight,
@@ -425,19 +412,26 @@ function WordItem({
   range: [number, number];
   progress: MotionValue<number>;
 }) {
-  const opacity = useTransform(progress, range, [0.14, 1]);
+  // Base opacity is 0.38 so words are ALWAYS cleanly readable before scroll!
+  const opacity = useTransform(progress, range, [0.38, 1]);
 
-  let styleClasses = "text-[#1c1b19]";
-  if (isAccent) {
-    styleClasses = "text-[#1d4ed8] font-black underline decoration-[#1d4ed8]/40 decoration-2 underline-offset-4";
-  } else if (isHighlight) {
-    styleClasses = "text-[#b1392b] font-black";
-  }
+  // Color transforms from soft muted tone to vivid solid tone
+  const color = useTransform(
+    progress,
+    range,
+    isAccent
+      ? ["rgba(29, 78, 216, 0.45)", "#1d4ed8"]
+      : isHighlight
+      ? ["rgba(177, 57, 43, 0.45)", "#b1392b"]
+      : ["rgba(28, 27, 25, 0.40)", "#1c1b19"]
+  );
 
   return (
     <motion.span
-      style={{ opacity }}
-      className={`inline-block mr-[0.28em] my-[0.06em] font-serif font-black ${styleClasses}`}
+      style={{ opacity, color }}
+      className={`inline-block mr-[0.28em] my-[0.06em] font-serif font-black transition-colors duration-100 ${
+        isAccent ? "underline decoration-[#1d4ed8]/35 decoration-2 underline-offset-4" : ""
+      }`}
     >
       {text}
     </motion.span>

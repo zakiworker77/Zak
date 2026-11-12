@@ -32,7 +32,6 @@ import ProblemSolution from "./components/ProblemSolution";
 import OfferSection from "./components/OfferSection";
 import AscensionModel from "./components/AscensionModel";
 import EarningsCalculator from "./components/EarningsCalculator";
-import QualificationQuiz from "./components/QualificationQuiz";
 import AboutSection from "./components/AboutSection";
 import FaqSection from "./components/FaqSection";
 import AgreementPage from "./components/AgreementPage";
@@ -388,9 +387,6 @@ export default function App() {
 
         {/* Potentials Calculator (MAD Revenue multiplier) */}
         <EarningsCalculator />
-
-        {/* Qualification quiz & Interactive Booking Widget */}
-        <QualificationQuiz />
 
         {/* About Operator Section */}
         <AboutSection />
